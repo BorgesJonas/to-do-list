@@ -1,12 +1,18 @@
-import { Button } from "@/components/button";
-import { Flex, Heading, VStack } from "@chakra-ui/react";
-import { FaFilter } from "react-icons/fa";
-import { FiPlus } from "react-icons/fi";
-import { LiaClipboardListSolid } from "react-icons/lia";
+import { Flex, VStack } from "@chakra-ui/react";
+import { useState } from "@/hooks/use-state";
 
-import { Tooltip } from "@/components/tooltip";
+import { Header } from "./components/header";
+import { Actions } from "./components/actions";
+
+interface DashboardState {
+  isCreateDrawerOpen: boolean;
+}
 
 export function Dashboard() {
+  const [state, setState] = useState<DashboardState>({
+    isCreateDrawerOpen: false,
+  });
+
   return (
     <Flex
       as="main"
@@ -16,24 +22,8 @@ export function Dashboard() {
       justifyContent="center"
     >
       <VStack>
-        <Flex as="header" gap={4} alignItems="center" mb={8}>
-          <Heading>TODO LIST</Heading>
-          <LiaClipboardListSolid size={22} />
-        </Flex>
-        <Flex justifyContent="space-between" width="300px">
-          <Tooltip content="Criar nova tarefa">
-            <Button variant="subtle" aria-label="Criar nova tarefa">
-              <FiPlus />
-              Nova Tarefa
-            </Button>
-          </Tooltip>
-
-          <Tooltip content="Filtrar">
-            <Button variant="subtle" aria-label="Filtrar tarefas">
-              <FaFilter size={8} />
-            </Button>
-          </Tooltip>
-        </Flex>
+        <Header />
+        <Actions />
       </VStack>
     </Flex>
   );
