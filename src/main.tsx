@@ -11,10 +11,10 @@ import "./index.css";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Auth0Provider
-      domain="dev-z6t2oh6nmqknn0ih.us.auth0.com"
-      clientId="RNghdHw4yXbKU1AuODAtWAPK7sw7b5dH"
+      domain={import.meta.env.VITE_AUTH0_DOMAIN}
+      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
       authorizationParams={{
-        redirect_uri: `${window.location.origin}`,
+        redirect_uri: window.location.origin,
       }}
     >
       <Provider>
