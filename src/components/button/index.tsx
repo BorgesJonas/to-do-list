@@ -1,4 +1,3 @@
-import type { ButtonProps as ChakraButtonProps } from "@chakra-ui/react";
 import {
   AbsoluteCenter,
   Button as ChakraButton,
@@ -7,12 +6,7 @@ import {
 } from "@chakra-ui/react";
 import * as React from "react";
 
-interface ButtonLoadingProps {
-  isLoading?: boolean;
-  loadingText?: React.ReactNode;
-}
-
-export interface ButtonProps extends ChakraButtonProps, ButtonLoadingProps {}
+import { ButtonProps } from "./types";
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(props, ref) {
