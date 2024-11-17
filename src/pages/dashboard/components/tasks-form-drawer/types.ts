@@ -6,7 +6,7 @@ export interface TasksFormProps {
 export interface FormValues {
   title: string;
   dueDate: string;
-  priority: string[];
-  status: string[];
+  priority: (string | undefined)[];
+  status: (string | undefined)[];
   description: string;
 }

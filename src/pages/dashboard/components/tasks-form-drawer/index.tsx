@@ -110,7 +110,7 @@ export function TasksFormDrawer({ isOpen, onClose }: TasksFormProps) {
                 render={({ field }) => (
                   <PrioritiesSelect
                     name={field.name}
-                    value={field.value}
+                    value={field.value as string[]}
                     portalRef={contentRef}
                     variant="subtle"
                     onValueChange={({ value }) => field.onChange(value)}
@@ -128,7 +128,7 @@ export function TasksFormDrawer({ isOpen, onClose }: TasksFormProps) {
                   <StatusSelect
                     variant="subtle"
                     name={field.name}
-                    value={field.value}
+                    value={field.value as string[]}
                     portalRef={contentRef}
                     onValueChange={({ value }) => field.onChange(value)}
                     onInteractOutside={() => field.onBlur()}
