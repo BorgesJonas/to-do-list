@@ -4,6 +4,8 @@ import { useState } from "@/hooks/use-state";
 import { Header } from "./components/header";
 import { Actions } from "./components/actions";
 import { TasksFormDrawer } from "./components/tasks-form-drawer";
+import { TasksList } from "./components/tasks-list";
+import { TasksProvider } from "./contexts/tasks-context/provider";
 
 import { DashboardState } from "./types";
 
@@ -19,23 +21,24 @@ export function Dashboard() {
   }
 
   return (
-    <>
+    <TasksProvider>
       <Flex
         as="main"
-        height="calc(100vh - 72px)"
         overflow="auto"
         alignItems="center"
         justifyContent="center"
+        py={8}
       >
-        <VStack>
+        <VStack gap={8}>
           <Header />
           <Actions onCreateNewTask={handleTaskDrawerVisible} />
+          <TasksList />
         </VStack>
       </Flex>
       <TasksFormDrawer
         isOpen={isCreateDrawerOpen}
         onClose={handleTaskDrawerVisible}
       />
-    </>
+    </TasksProvider>
   );
 }

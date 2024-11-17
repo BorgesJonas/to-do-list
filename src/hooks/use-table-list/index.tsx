@@ -27,26 +27,31 @@ const defaultPagination: Pagination = {
 
 export function useTableList<T, P extends object>(
   url: string,
-  initialParams: P
+  initialParams?: P
 ): UseTableResult<T, P> {
   const [data, setData] = useState<T[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [pagination, setPagination] = useState<Pagination>(defaultPagination);
-  const [params, setParams] = useState<P>(initialParams);
+  const [params, setParams] = useState<P | undefined>(initialParams);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
+
     setError(null);
     try {
-      const response = await service.get<{ data: T[]; total: number }>(url, {
+      const response = await service.get(url, {
         params: {
           ...params,
-          page: pagination.currentPage,
-          pageSize: pagination.pageSize,
+          _page: pagination.currentPage,
+          _limit: pagination.pageSize,
         },
       });
-      setData(response.data.data);
+
+      console.log("TOTAL", response);
+      console.log("RESPONSE", response);
+
+      setData(response.data);
       setPagination((prev) => ({ ...prev, total: response.data.total }));
     } catch (err) {
       setError(err instanceof Error ? err : new Error("An error occurred"));
