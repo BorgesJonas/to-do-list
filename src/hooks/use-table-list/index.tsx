@@ -44,17 +44,14 @@ export function useTableList<T, P extends object>(
         params: {
           ...params,
           _page: pagination.currentPage,
-          _limit: pagination.pageSize,
+          _per_page: pagination.pageSize,
         },
       });
 
-      console.log("TOTAL", response);
-      console.log("RESPONSE", response);
-
-      setData(response.data);
-      setPagination((prev) => ({ ...prev, total: response.data.total }));
+      setData(response.data.data);
+      setPagination((prev) => ({ ...prev, total: response.data.items }));
     } catch (err) {
-      setError(err instanceof Error ? err : new Error("An error occurred"));
+      setError(err instanceof Error ? err : new Error("Error while fetching"));
     } finally {
       setIsLoading(false);
     }

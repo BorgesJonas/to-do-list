@@ -3,15 +3,14 @@ import { PropsWithChildren } from "react";
 import { TasksContext } from "./context";
 
 export function TasksProvider({ children }: PropsWithChildren) {
-  const { isLoading, data, pagination } = useTableList("tasks", {
-    due_date: "2025-02-10",
-  });
-  // console.log("PAGINATION", pagination);
+  const { isLoading, data, refetch } = useTableList("tasks", {});
+
   return (
     <TasksContext.Provider
       value={{
         isLoading,
         tasks: data,
+        refetchTasks: refetch,
       }}
     >
       {children}
