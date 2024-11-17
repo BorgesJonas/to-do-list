@@ -21,12 +21,14 @@ import { StatusSelect } from "./components/status-select";
 
 import { FormValues, TasksFormProps } from "./types";
 import { schema } from "./schema";
+import { service } from "@/service";
+import { toaster } from "@/components/toaster/consts";
 
 export function TasksFormDrawer({ isOpen, onClose }: TasksFormProps) {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const {
-    formState: { errors },
+    formState: { errors, isSubmitting },
     control,
     reset,
     register,
@@ -41,7 +43,31 @@ export function TasksFormDrawer({ isOpen, onClose }: TasksFormProps) {
   }
 
   async function onSubmit(data: FormValues) {
-    console.log("DATA", data);
+    const payload = {
+      title: data.title,
+      due_date: data.dueDate,
+      priority: data.priority[0],
+      status: data.status[0],
+      description: data.description,
+    };
+
+    try {
+      await service.post("tasks", payload);
+
+      toaster.create({
+        title: "Criada",
+        description: "Sua tarefa fio criada com sucesso!",
+        type: "success",
+      });
+
+      handleClose();
+    } catch {
+      toaster.create({
+        title: "Erro",
+        description: "Erro ao criar tarefa",
+        type: "error",
+      });
+    }
   }
 
   return (
@@ -127,9 +153,13 @@ export function TasksFormDrawer({ isOpen, onClose }: TasksFormProps) {
         </DrawerBody>
         <DrawerFooter>
           <DrawerActionTrigger asChild>
-            <Button variant="subtle">Cancelar</Button>
+            <Button variant="subtle" isDisabled={isSubmitting}>
+              Cancelar
+            </Button>
           </DrawerActionTrigger>
-          <Button type="submit">Salvar</Button>
+          <Button type="submit" isLoading={isSubmitting}>
+            Salvar
+          </Button>
         </DrawerFooter>
         <DrawerCloseTrigger />
       </DrawerContent>

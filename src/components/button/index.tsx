@@ -10,8 +10,14 @@ import { ButtonProps } from "./types";
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(props, ref) {
-    const { isLoading, disabled, loadingText, children, ...rest } = props;
-    const isDisabled = isLoading || disabled;
+    const {
+      isLoading,
+      isDisabled: isDisabledProps,
+      loadingText,
+      children,
+      ...rest
+    } = props;
+    const isDisabled = isLoading || isDisabledProps;
 
     return (
       <ChakraButton disabled={isDisabled} ref={ref} {...rest}>
