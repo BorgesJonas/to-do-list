@@ -26,9 +26,7 @@ export function StatusSelect({ portalRef }) {
   return (
     <SelectRoot collection={statusOptions} variant="subtle">
       <SelectLabel>Status</SelectLabel>
-      <SelectTrigger>
-        <SelectValueText placeholder="Select a prioridade" />
-      </SelectTrigger>
+      <SelectTrigger />
       <SelectContent portalRef={portalRef}>
         {statusOptions.items.map((status) => (
           <SelectItem zIndex={1000} item={status} key={status.value}>
