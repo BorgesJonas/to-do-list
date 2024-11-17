@@ -5,19 +5,22 @@ import { FiPlus } from "react-icons/fi";
 import { Button } from "@/components/button";
 import { Tooltip } from "@/components/tooltip";
 
-export function Actions() {
+import { ActionsProps } from "./types";
+
+export function Actions({ onCreateNewTask }: ActionsProps) {
   return (
     <Flex justifyContent="space-between" width="300px">
       <Tooltip content="Criar nova tarefa">
-        <Button variant="subtle" aria-label="Criar nova tarefa">
+        <Button aria-label="Criar nova tarefa" onClick={onCreateNewTask}>
           <FiPlus />
           Nova Tarefa
         </Button>
       </Tooltip>
 
       <Tooltip content="Filtrar">
-        <Button variant="subtle" aria-label="Filtrar tarefas">
+        <Button aria-label="Filtrar tarefas">
           <FaFilter size={8} />
+          Filtrar
         </Button>
       </Tooltip>
     </Flex>
