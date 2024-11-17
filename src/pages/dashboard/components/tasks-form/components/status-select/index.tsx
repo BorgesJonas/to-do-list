@@ -1,28 +1,15 @@
-import { createListCollection } from "@chakra-ui/react";
-import { TasksStatus } from "@/enums/tasks-status";
 import {
   SelectContent,
   SelectItem,
   SelectLabel,
   SelectRoot,
   SelectTrigger,
-  SelectValueText,
 } from "@/components/select";
 
-const prioritiesLabels: Record<TasksStatus, string> = {
-  [TasksStatus.COMPLETED]: "Completa",
-  [TasksStatus.IN_PROGRESS]: "Em progresso",
-  [TasksStatus.TODO]: "A fazer",
-};
+import { StatusSelectProps } from "./types";
+import { statusOptions } from "./consts";
 
-const statusOptions = createListCollection({
-  items: Object.values(TasksStatus).map((value) => ({
-    label: prioritiesLabels[value],
-    value,
-  })),
-});
-
-export function StatusSelect({ portalRef }) {
+export function StatusSelect({ portalRef }: StatusSelectProps) {
   return (
     <SelectRoot collection={statusOptions} variant="subtle">
       <SelectLabel>Status</SelectLabel>

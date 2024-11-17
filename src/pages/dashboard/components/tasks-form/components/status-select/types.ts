@@ -1,5 +1,5 @@
 import { RefObject } from "react";
 
-export interface PrioritiesSelectProps {
+export interface StatusSelectProps {
   portalRef?: RefObject<HTMLDivElement>;
 }
