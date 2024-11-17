@@ -1,29 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { service } from "@/service";
-
-interface Pagination {
-  currentPage: number;
-  pageSize: number;
-  total: number;
-}
-
-interface UseTableResult<T, P> {
-  isLoading: boolean;
-  error: Error | null;
-  data: T[];
-  refetch: () => void;
-  pagination: Pagination;
-  setCurrentPage: (page: number) => void;
-  setPageSize: (size: number) => void;
-  params: P;
-  setParams: (params: P) => void;
-}
-
-const defaultPagination: Pagination = {
-  currentPage: 1,
-  pageSize: 10,
-  total: 0,
-};
+import { UseTableResult, Pagination } from "./types";
+import { defaultPagination } from "./consts";
 
 export function useTableList<T, P extends object>(
   url: string,
