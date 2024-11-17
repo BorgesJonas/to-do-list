@@ -3,10 +3,9 @@ import { useState } from "@/hooks/use-state";
 
 import { Header } from "./components/header";
 import { Actions } from "./components/actions";
-import { TasksForm } from "./components/tasks-form";
+import { TasksFormDrawer } from "./components/tasks-form-drawer";
 
 import { DashboardState } from "./types";
-import { StatusSelect } from "./components/tasks-form/components/status-select";
 
 export function Dashboard() {
   const [state, setState] = useState<DashboardState>({
@@ -33,7 +32,7 @@ export function Dashboard() {
           <Actions onCreateNewTask={handleTaskDrawerVisible} />
         </VStack>
       </Flex>
-      <TasksForm
+      <TasksFormDrawer
         isOpen={isCreateDrawerOpen}
         onClose={handleTaskDrawerVisible}
       />

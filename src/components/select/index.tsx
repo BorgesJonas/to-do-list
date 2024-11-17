@@ -1,7 +1,5 @@
-"use client";
-
 import { Select as ChakraSelect, Portal } from "@chakra-ui/react";
-import { CloseButton } from "./close-button";
+import { CloseButton } from "./components/close-button";
 import * as React from "react";
 import {
   SelectContentProps,
