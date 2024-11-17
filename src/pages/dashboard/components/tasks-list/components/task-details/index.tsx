@@ -1,6 +1,5 @@
 import { Flex, Text, Box, IconButton } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
-import { FiTrash2 } from "react-icons/fi";
 
 import { Tag } from "@/components/tag";
 import { TaskDetailsProps } from "./types";
@@ -8,6 +7,7 @@ import { Tooltip } from "@/components/tooltip";
 import { prioritiesLabels, statusLabels } from "@/common/consts";
 import { formatDate } from "@/common/formatters";
 import { prioritiesTagsSchema, statusTagsSchema } from "./consts";
+import { DeleteButton } from "./delete-button";
 
 export function TaskDetails({ task }: TaskDetailsProps) {
   return (
@@ -41,9 +41,7 @@ export function TaskDetails({ task }: TaskDetailsProps) {
           </IconButton>
         </Tooltip>
         <Tooltip content="Deletar">
-          <IconButton variant="ghost">
-            <FiTrash2 color="red" />
-          </IconButton>
+          <DeleteButton taskId={task.id} />
         </Tooltip>
       </Flex>
     </Flex>
