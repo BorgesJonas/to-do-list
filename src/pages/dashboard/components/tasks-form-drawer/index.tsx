@@ -23,8 +23,10 @@ import { FormValues, TasksFormProps } from "./types";
 import { schema } from "./schema";
 import { service } from "@/service";
 import { toaster } from "@/components/toaster/consts";
+import { useTasksContext } from "../../contexts/tasks-context";
 
 export function TasksFormDrawer({ isOpen, onClose }: TasksFormProps) {
+  const { refetchTasks } = useTasksContext();
   const contentRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -60,6 +62,7 @@ export function TasksFormDrawer({ isOpen, onClose }: TasksFormProps) {
         type: "success",
       });
 
+      refetchTasks();
       handleClose();
     } catch {
       toaster.create({

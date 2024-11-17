@@ -1,12 +1,6 @@
 import { createListCollection } from "@chakra-ui/react";
 import { TasksPriorities } from "@/enums/tasks-priorities";
-
-const prioritiesLabels: Record<TasksPriorities, string> = {
-  [TasksPriorities.HIGHEST]: "Muito Alta",
-  [TasksPriorities.HIGH]: "Alta",
-  [TasksPriorities.LOW]: "Baixa",
-  [TasksPriorities.LOWEST]: "Muito Baixa",
-};
+import { prioritiesLabels } from "@/common/consts";
 
 export const prioritiesOptions = createListCollection({
   items: Object.values(TasksPriorities).map((value) => ({

@@ -7,6 +7,7 @@ import {
 } from "./components/color-mode-button";
 
 export function Provider(props: ColorModeProviderProps) {
+  console.log("DEFAULT", defaultSystem);
   return (
     <ChakraProvider value={defaultSystem}>
       <ColorModeProvider {...props} />
