@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Flex, Text, Box, IconButton } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
-import { FiTrash2 } from "react-icons/fi";
 
 import { Tag } from "@/components/tag";
 import { TaskDetailsProps } from "./types";
