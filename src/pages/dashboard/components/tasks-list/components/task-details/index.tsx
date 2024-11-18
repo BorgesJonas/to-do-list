@@ -8,8 +8,15 @@ import { prioritiesLabels, statusLabels } from "@/common/consts";
 import { formatDate } from "@/common/formatters";
 import { prioritiesTagsSchema, statusTagsSchema } from "./consts";
 import { DeleteButton } from "./delete-button";
+import { useTasksContext } from "@/pages/dashboard/contexts/tasks-context";
 
 export function TaskDetails({ task }: TaskDetailsProps) {
+  const { onEditTaskDrawerVisible } = useTasksContext();
+
+  function handleEditTask() {
+    onEditTaskDrawerVisible(task);
+  }
+
   return (
     <Flex
       bg="white"
@@ -36,7 +43,7 @@ export function TaskDetails({ task }: TaskDetailsProps) {
       </Box>
       <Flex gap={2}>
         <Tooltip content="Editar">
-          <IconButton variant="ghost">
+          <IconButton variant="ghost" onClick={handleEditTask}>
             <FiEdit color="green" />
           </IconButton>
         </Tooltip>

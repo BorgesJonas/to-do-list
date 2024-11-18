@@ -5,13 +5,18 @@ import { FiPlus } from "react-icons/fi";
 import { Button } from "@/components/button";
 import { Tooltip } from "@/components/tooltip";
 
-import { ActionsProps } from "./types";
+import { useTasksContext } from "../../contexts/tasks-context";
 
-export function Actions({ onCreateNewTask }: ActionsProps) {
+export function Actions() {
+  const { onCreateTaskDrawerVisible } = useTasksContext();
+
   return (
     <Flex justifyContent="space-between" width="300px">
       <Tooltip content="Criar nova tarefa">
-        <Button aria-label="Criar nova tarefa" onClick={onCreateNewTask}>
+        <Button
+          aria-label="Criar nova tarefa"
+          onClick={onCreateTaskDrawerVisible}
+        >
           <FiPlus />
           Nova Tarefa
         </Button>
