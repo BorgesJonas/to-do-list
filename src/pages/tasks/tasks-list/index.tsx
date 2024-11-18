@@ -2,14 +2,14 @@ import { Flex, VStack } from "@chakra-ui/react";
 
 import { Header } from "./components/header";
 import { Actions } from "./components/actions";
-import { TasksList } from "./components/tasks-list";
-import { TasksProvider } from "./contexts/tasks-context/provider";
+import { List } from "./components/list";
+import { TasksProvider } from "@/pages/tasks/contexts/tasks-context";
 
-import { TasksCreateDrawer } from "./components/tasks-create-drawer";
-import { TasksEditDrawer } from "./components/tasks-edit-drawer";
-import { TasksFiltersDrawer } from "./components/tasks-filters-drawer";
+import { TasksCreateDrawer } from "../components/tasks-create-drawer";
+import { TasksEditDrawer } from "../components/tasks-edit-drawer";
+import { TasksFiltersDrawer } from "../components/tasks-filters-drawer";
 
-export function Tasks() {
+export function TasksList() {
   return (
     <TasksProvider>
       <Flex
@@ -22,7 +22,7 @@ export function Tasks() {
         <VStack gap={8}>
           <Header />
           <Actions />
-          <TasksList />
+          <List />
         </VStack>
       </Flex>
       <TasksCreateDrawer />

@@ -16,7 +16,7 @@ import {
 
 import { FormValues } from "./types";
 import { schema } from "./schema";
-import { useTasksContext } from "../../contexts/tasks-context";
+import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
 import { TasksForm } from "../tasks-form";
 
 export function TasksCreateDrawer() {
