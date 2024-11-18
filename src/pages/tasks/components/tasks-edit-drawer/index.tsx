@@ -91,7 +91,11 @@ export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
           </DrawerBody>
           <DrawerFooter>
             <DrawerActionTrigger asChild>
-              <Button variant="subtle" isDisabled={isSubmitting}>
+              <Button
+                aria-label="Cancelar edição"
+                variant="subtle"
+                isDisabled={isSubmitting}
+              >
                 Cancelar
               </Button>
             </DrawerActionTrigger>
