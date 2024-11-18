@@ -9,9 +9,7 @@ export function Login() {
       <Heading>This is the Login Page</Heading>
       <Button
         variant="subtle"
-        onClick={() =>
-          loginWithRedirect({ appState: { returnTo: "/dashboard" } })
-        }
+        onClick={() => loginWithRedirect({ appState: { returnTo: "/tasks" } })}
       >
         Log In
       </Button>

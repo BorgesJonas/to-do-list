@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { Login } from "@/pages/login";
-import { Dashboard } from "@/pages/dashboard";
+import { Tasks } from "@/pages/tasks";
 import { AppLayout } from "@/components/app-layout";
+import { TaskDetails } from "@/pages/task-details";
 
 export const routes = createBrowserRouter([
   {
@@ -15,8 +16,12 @@ export const routes = createBrowserRouter([
         element: <AppLayout />,
         children: [
           {
-            path: "/dashboard",
-            element: <Dashboard />,
+            path: "/tasks",
+            element: <Tasks />,
+          },
+          {
+            path: "/tasks/:id",
+            element: <TaskDetails />,
           },
         ],
       },

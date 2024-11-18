@@ -14,13 +14,15 @@ import {
   DrawerTitle,
 } from "@/components/drawer";
 
-import { FormValues } from "./types";
+import { FormValues, TasksEditDrawerProps } from "./types";
 import { schema } from "./schema";
 import { useTasksContext } from "../../contexts/tasks-context";
 import { TasksForm } from "../tasks-form";
 import { Task } from "@/types/task";
+import { TasksStatus } from "@/enums/tasks-status";
+import { TasksPriorities } from "@/enums/tasks-priorities";
 
-export function TasksEditDrawer() {
+export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
   const { onEditTask } = useTasksContext();
   const drawerRef = useRef<HTMLDivElement>(null);
   const { selectedTask, onEditTaskDrawerVisible, isEditDrawerOpen } =
@@ -47,10 +49,13 @@ export function TasksEditDrawer() {
       id: selectedTask.id,
       title: data.title,
       due_date: data.dueDate,
-      status: data.status[0] as string,
-      priority: data.priority[0] as string,
+      status: data.status[0] as TasksStatus,
+      priority: data.priority[0] as TasksPriorities,
       description: data.description,
     });
+
+    if (onEditSuccess) onEditSuccess();
+
     handleClose();
   }
 

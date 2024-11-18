@@ -1,5 +1,5 @@
 import { Flex, Text, Box, IconButton } from "@chakra-ui/react";
-import { FiEdit } from "react-icons/fi";
+import { FiEdit, FiEye } from "react-icons/fi";
 
 import { Tag } from "@/components/tag";
 import { TaskDetailsProps } from "./types";
@@ -8,13 +8,19 @@ import { prioritiesLabels, statusLabels } from "@/common/consts";
 import { formatDate } from "@/common/formatters";
 import { prioritiesTagsSchema, statusTagsSchema } from "./consts";
 import { DeleteButton } from "./delete-button";
-import { useTasksContext } from "@/pages/dashboard/contexts/tasks-context";
+import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
+import { useNavigate } from "react-router-dom";
 
 export function TaskDetails({ task }: TaskDetailsProps) {
+  const navigate = useNavigate();
   const { onEditTaskDrawerVisible } = useTasksContext();
 
   function handleEditTask() {
     onEditTaskDrawerVisible(task);
+  }
+
+  function handleRediretctToDetails() {
+    navigate(`/tasks/${task.id}`);
   }
 
   return (
@@ -41,7 +47,12 @@ export function TaskDetails({ task }: TaskDetailsProps) {
           </Tag>
         </Flex>
       </Box>
-      <Flex gap={2}>
+      <Flex>
+        <Tooltip content="Visualizar">
+          <IconButton variant="solid" onClick={handleRediretctToDetails}>
+            <FiEye color="tea" />
+          </IconButton>
+        </Tooltip>
         <Tooltip content="Editar">
           <IconButton variant="solid" onClick={handleEditTask}>
             <FiEdit color="green" />

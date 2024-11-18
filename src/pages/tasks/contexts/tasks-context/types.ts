@@ -5,9 +5,16 @@ import { Task } from "@/types/task";
 export type TaskEditParams = Task;
 export type TaskCreateParams = Omit<Task, "id">;
 
+export interface FilterParams {
+  due_date?: string;
+  priority?: string;
+  status?: string;
+}
+
 export interface TasksProviderState {
   isCreateDrawerOpen: boolean;
   isEditDrawerOpen: boolean;
+  isFiltersDrawerOpen: boolean;
   selectedTask: Task;
 }
 
@@ -22,4 +29,6 @@ export interface TasksProviderValues extends TasksProviderState {
   onEditTask: (task: TaskEditParams) => void;
   onCreateTask: (task: TaskCreateParams) => void;
   onDeleteTask: (id: string) => void;
+  onFilter: (params: FilterParams) => void;
+  onFilterDrawerVisible: () => void;
 }
