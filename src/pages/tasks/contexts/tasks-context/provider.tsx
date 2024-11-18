@@ -3,23 +3,27 @@ import { PropsWithChildren } from "react";
 import { TasksContext } from "./context";
 import { Task } from "@/types/task";
 import { useState } from "@/hooks/use-state";
-import { TasksProviderState, TaskEditParams, TaskCreateParams } from "./types";
+import {
+  TasksProviderState,
+  TaskEditParams,
+  TaskCreateParams,
+  FilterParams,
+} from "./types";
 import { toaster } from "@/components/toaster/consts";
 import { service } from "@/service";
 
 export function TasksProvider({ children }: PropsWithChildren) {
   const [state, setState] = useState<TasksProviderState>({
+    isFiltersDrawerOpen: false,
     isCreateDrawerOpen: false,
     isEditDrawerOpen: false,
     selectedTask: {} as Task,
   });
 
-  const { isLoading, data, pagination, refetch, setCurrentPage } = useTableList<
-    _,
-    Task[]
-  >("tasks");
+  const { isCreateDrawerOpen, isEditDrawerOpen, isFiltersDrawerOpen } = state;
 
-  const { isCreateDrawerOpen, isEditDrawerOpen } = state;
+  const { isLoading, data, pagination, refetch, setCurrentPage, setParams } =
+    useTableList<Task, FilterParams>("tasks");
 
   function handleCreateTaskDrawerVisible() {
     setState({ isCreateDrawerOpen: !isCreateDrawerOpen });
@@ -88,6 +92,14 @@ export function TasksProvider({ children }: PropsWithChildren) {
     }
   }
 
+  function handleFilterDrawerVisible() {
+    setState({ isFiltersDrawerOpen: !isFiltersDrawerOpen });
+  }
+
+  function handleFilter(filters: FilterParams) {
+    setParams(filters);
+  }
+
   return (
     <TasksContext.Provider
       value={{
@@ -102,6 +114,8 @@ export function TasksProvider({ children }: PropsWithChildren) {
         onCreateTask: handleCreateTask,
         onCreateTaskDrawerVisible: handleCreateTaskDrawerVisible,
         onEditTaskDrawerVisible: handleEditTaskDrawerVisible,
+        onFilter: handleFilter,
+        onFilterDrawerVisible: handleFilterDrawerVisible,
       }}
     >
       {children}

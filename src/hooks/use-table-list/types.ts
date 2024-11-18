@@ -12,6 +12,5 @@ export interface UseTableResult<T, P> {
   pagination: Pagination;
   setCurrentPage: (page: number) => void;
   setPageSize: (size: number) => void;
-  params: P;
   setParams: (params: P) => void;
 }

@@ -13,10 +13,10 @@ export function useTableList<T, P extends object>(
   const [pagination, setPagination] = useState<Pagination>(defaultPagination);
   const [params, setParams] = useState<P | undefined>(initialParams);
 
-  const fetchData = useCallback(async () => {
+  const handleGetData = useCallback(async () => {
     setIsLoading(true);
-
     setError(null);
+
     try {
       const response = await service.get(url, {
         params: {
@@ -44,18 +44,17 @@ export function useTableList<T, P extends object>(
   }, []);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    handleGetData();
+  }, [handleGetData]);
 
   return {
     isLoading,
     error,
     data,
-    refetch: fetchData,
+    refetch: handleGetData,
     pagination,
     setCurrentPage,
     setPageSize,
-    params,
     setParams,
   };
 }

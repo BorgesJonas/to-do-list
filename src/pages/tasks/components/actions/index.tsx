@@ -8,7 +8,8 @@ import { Tooltip } from "@/components/tooltip";
 import { useTasksContext } from "../../contexts/tasks-context";
 
 export function Actions() {
-  const { onCreateTaskDrawerVisible } = useTasksContext();
+  const { onCreateTaskDrawerVisible, onFilterDrawerVisible } =
+    useTasksContext();
 
   return (
     <Flex justifyContent="space-between" width="300px">
@@ -23,7 +24,7 @@ export function Actions() {
       </Tooltip>
 
       <Tooltip content="Filtrar">
-        <Button aria-label="Filtrar tarefas">
+        <Button aria-label="Filtrar tarefas" onClick={onFilterDrawerVisible}>
           <FaFilter size={8} />
           Filtrar
         </Button>

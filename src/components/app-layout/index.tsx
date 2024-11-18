@@ -11,10 +11,6 @@ export function AppLayout() {
     if (!isLoading && !isAuthenticated) {
       navigate("/");
     }
-
-    if (!isLoading && isAuthenticated) {
-      navigate("/dashboard");
-    }
   }, [isAuthenticated, isLoading, navigate]);
 
   return (

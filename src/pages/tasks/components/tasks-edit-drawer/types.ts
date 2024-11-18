@@ -1,9 +1,5 @@
-import { Task } from "@/types/task";
-
 export interface TasksEditDrawerProps {
-  isOpen: boolean;
-  task: Task;
-  onClose: () => void;
+  onEditSuccess?: () => void;
 }
 
 export interface FormValues {

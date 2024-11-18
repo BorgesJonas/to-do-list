@@ -7,8 +7,9 @@ import { TasksProvider } from "./contexts/tasks-context/provider";
 
 import { TasksCreateDrawer } from "./components/tasks-create-drawer";
 import { TasksEditDrawer } from "./components/tasks-edit-drawer";
+import { TasksFiltersDrawer } from "./components/tasks-filters-drawer";
 
-export function Dashboard() {
+export function Tasks() {
   return (
     <TasksProvider>
       <Flex
@@ -26,6 +27,7 @@ export function Dashboard() {
       </Flex>
       <TasksCreateDrawer />
       <TasksEditDrawer />
+      <TasksFiltersDrawer />
     </TasksProvider>
   );
 }

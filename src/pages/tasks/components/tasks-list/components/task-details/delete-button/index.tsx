@@ -10,7 +10,7 @@ import {
 import { Flex, IconButton, Text } from "@chakra-ui/react";
 import { Button } from "@/components/button";
 import { DeletePopoverProps } from "./types";
-import { useTasksContext } from "@/pages/dashboard/contexts/tasks-context";
+import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
 
 export function DeleteButton({ taskId }: DeletePopoverProps) {
   const { onDeleteTask } = useTasksContext();
@@ -23,7 +23,6 @@ export function DeleteButton({ taskId }: DeletePopoverProps) {
 
   async function handleDelete() {
     setIsLoading(true);
-
     await onDeleteTask(taskId);
     setIsLoading(false);
   }
