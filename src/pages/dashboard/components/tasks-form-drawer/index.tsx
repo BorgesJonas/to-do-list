@@ -58,7 +58,7 @@ export function TasksFormDrawer({ isOpen, onClose }: TasksFormProps) {
 
       toaster.create({
         title: "Criada",
-        description: "Sua tarefa fio criada com sucesso!",
+        description: "Sua tarefa foi criada com sucesso!",
         type: "success",
       });
 

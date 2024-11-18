@@ -30,7 +30,7 @@ export function DeleteButton({ taskId }: DeletePopoverProps) {
       await service.delete(`tasks/${taskId}`);
       toaster.create({
         title: "Criada",
-        description: "Sua tarefa fio criada com sucesso!",
+        description: "Sua tarefa foi deletada com sucesso!",
         type: "success",
       });
       refetchTasks();
