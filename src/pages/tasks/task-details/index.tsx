@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import { TasksProvider } from "../tasks/contexts/tasks-context";
+import { TasksProvider } from "@/pages/tasks/contexts/tasks-context";
 import { Details } from "./components/details";
 
 export function TaskDetails() {

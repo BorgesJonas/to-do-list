@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { Login } from "@/pages/login";
-import { Tasks } from "@/pages/tasks";
+
 import { AppLayout } from "@/components/app-layout";
-import { TaskDetails } from "@/pages/task-details";
+import { TasksList } from "@/pages/tasks/tasks-list";
+import { TaskDetails } from "@/pages/tasks/task-details";
 
 export const routes = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ export const routes = createBrowserRouter([
         children: [
           {
             path: "/tasks",
-            element: <Tasks />,
+            element: <TasksList />,
           },
           {
             path: "/tasks/:id",

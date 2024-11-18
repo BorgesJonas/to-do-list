@@ -16,7 +16,7 @@ import { Controller, useForm } from "react-hook-form";
 import { PrioritiesSelect } from "../priorities-select";
 import { StatusSelect } from "../status-select";
 import { Flex, Input } from "@chakra-ui/react";
-import { useTasksContext } from "../../contexts/tasks-context";
+import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
 import { FormValues } from "./types";
 import { TasksStatus } from "@/enums/tasks-status";
 import { TasksPriorities } from "@/enums/tasks-priorities";
