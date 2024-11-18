@@ -1,3 +1,5 @@
+import { FiTrash2 } from "react-icons/fi";
+import { useState } from "react";
 import {
   PopoverArrow,
   PopoverBody,
@@ -6,16 +8,12 @@ import {
   PopoverTrigger,
 } from "@/components/popover";
 import { Flex, IconButton, Text } from "@chakra-ui/react";
-import { FiTrash2 } from "react-icons/fi";
-import { useState } from "react";
 import { Button } from "@/components/button";
 import { DeletePopoverProps } from "./types";
 import { useTasksContext } from "@/pages/dashboard/contexts/tasks-context";
-import { service } from "@/service";
-import { toaster } from "@/components/toaster/consts";
 
 export function DeleteButton({ taskId }: DeletePopoverProps) {
-  const { refetchTasks } = useTasksContext();
+  const { onDeleteTask } = useTasksContext();
   const [isLoading, setIsLoading] = useState(false);
   const [isPopoverVisible, setPopoverVisible] = useState(false);
 
@@ -26,23 +24,8 @@ export function DeleteButton({ taskId }: DeletePopoverProps) {
   async function handleDelete() {
     setIsLoading(true);
 
-    try {
-      await service.delete(`tasks/${taskId}`);
-      toaster.create({
-        title: "Criada",
-        description: "Sua tarefa foi deletada com sucesso!",
-        type: "success",
-      });
-      refetchTasks();
-    } catch {
-      toaster.create({
-        title: "Erro",
-        description: "Houve um erro ao tentar deletar a task",
-        type: "error",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    await onDeleteTask(taskId);
+    setIsLoading(false);
   }
 
   return (

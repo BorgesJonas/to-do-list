@@ -70,6 +70,24 @@ export function TasksProvider({ children }: PropsWithChildren) {
     }
   }
 
+  async function handleDeleteTask(id: string) {
+    try {
+      await service.delete(`tasks/${id}`);
+      toaster.create({
+        title: "Criada",
+        description: "Sua tarefa foi deletada com sucesso!",
+        type: "success",
+      });
+      refetch();
+    } catch {
+      toaster.create({
+        title: "Erro",
+        description: "Houve um erro ao tentar deletar a task",
+        type: "error",
+      });
+    }
+  }
+
   return (
     <TasksContext.Provider
       value={{
@@ -80,6 +98,7 @@ export function TasksProvider({ children }: PropsWithChildren) {
         setCurrentPage,
         refetchTasks: refetch,
         onEditTask: handleEditTask,
+        onDeleteTask: handleDeleteTask,
         onCreateTask: handleCreateTask,
         onCreateTaskDrawerVisible: handleCreateTaskDrawerVisible,
         onEditTaskDrawerVisible: handleEditTaskDrawerVisible,

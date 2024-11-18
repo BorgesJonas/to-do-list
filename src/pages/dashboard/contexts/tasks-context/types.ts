@@ -21,4 +21,5 @@ export interface TasksProviderValues extends TasksProviderState {
   onEditTaskDrawerVisible: (task: Task) => void;
   onEditTask: (task: TaskEditParams) => void;
   onCreateTask: (task: TaskCreateParams) => void;
+  onDeleteTask: (id: string) => void;
 }
