@@ -43,7 +43,7 @@ export function TaskDetails({ task }: TaskDetailsProps) {
       </Box>
       <Flex gap={2}>
         <Tooltip content="Editar">
-          <IconButton variant="ghost" onClick={handleEditTask}>
+          <IconButton variant="solid" onClick={handleEditTask}>
             <FiEdit color="green" />
           </IconButton>
         </Tooltip>

@@ -17,12 +17,12 @@
       "description": "Progresso"
     },
     {
-      "id": "dda1",
-      "title": "Nova Tarefa ",
+      "title": "Edit Tarefa ",
       "due_date": "2026-10-10",
       "priority": "highest",
-      "status": "todo",
-      "description": "Teste"
+      "status": "in_progress",
+      "description": "Teste",
+      "id": "dda1"
     }
   ]
 }

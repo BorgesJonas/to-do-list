@@ -51,7 +51,7 @@ export function DeleteButton({ taskId }: DeletePopoverProps) {
       onOpenChange={(e) => setPopoverVisible(e.open)}
     >
       <PopoverTrigger asChild>
-        <IconButton variant="ghost" onClick={handlePopoverVisible}>
+        <IconButton variant="solid" onClick={handlePopoverVisible}>
           <FiTrash2 color="red" />
         </IconButton>
       </PopoverTrigger>
