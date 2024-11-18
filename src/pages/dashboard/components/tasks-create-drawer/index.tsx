@@ -16,13 +16,11 @@ import {
 
 import { FormValues } from "./types";
 import { schema } from "./schema";
-import { service } from "@/service";
-import { toaster } from "@/components/toaster/consts";
 import { useTasksContext } from "../../contexts/tasks-context";
 import { TasksForm } from "../tasks-form";
 
 export function TasksCreateDrawer() {
-  const { refetchTasks } = useTasksContext();
+  const { onCreateTask } = useTasksContext();
   const drawerRef = useRef<HTMLDivElement>(null);
   const { isCreateDrawerOpen, onCreateTaskDrawerVisible } = useTasksContext();
 
@@ -42,32 +40,14 @@ export function TasksCreateDrawer() {
   }
 
   async function onSubmit(data: FormValues) {
-    const payload = {
+    await onCreateTask({
       title: data.title,
       due_date: data.dueDate,
       priority: data.priority[0],
       status: data.status[0],
       description: data.description,
-    };
-
-    try {
-      await service.post("tasks", payload);
-
-      toaster.create({
-        title: "Criada",
-        description: "Sua tarefa foi criada com sucesso!",
-        type: "success",
-      });
-
-      refetchTasks();
-      handleClose();
-    } catch {
-      toaster.create({
-        title: "Erro",
-        description: "Erro ao criar tarefa",
-        type: "error",
-      });
-    }
+    });
+    handleClose();
   }
 
   return (

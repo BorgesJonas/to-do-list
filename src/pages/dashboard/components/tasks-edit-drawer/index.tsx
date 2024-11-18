@@ -16,13 +16,12 @@ import {
 
 import { FormValues } from "./types";
 import { schema } from "./schema";
-import { service } from "@/service";
-import { toaster } from "@/components/toaster/consts";
 import { useTasksContext } from "../../contexts/tasks-context";
 import { TasksForm } from "../tasks-form";
+import { Task } from "@/types/task";
 
 export function TasksEditDrawer() {
-  const { refetchTasks } = useTasksContext();
+  const { onEditTask } = useTasksContext();
   const drawerRef = useRef<HTMLDivElement>(null);
   const { selectedTask, onEditTaskDrawerVisible, isEditDrawerOpen } =
     useTasksContext();
@@ -39,37 +38,20 @@ export function TasksEditDrawer() {
   } = methods;
 
   function handleClose() {
-    onEditTaskDrawerVisible();
+    onEditTaskDrawerVisible({} as Task);
     reset();
   }
 
   async function onSubmit(data: FormValues) {
-    const payload = {
+    await onEditTask({
+      id: selectedTask.id,
       title: data.title,
       due_date: data.dueDate,
-      priority: data.priority[0],
-      status: data.status[0],
+      status: data.status[0] as string,
+      priority: data.priority[0] as string,
       description: data.description,
-    };
-
-    try {
-      await service.put(`tasks/${selectedTask.id}`, payload); // ALTERAR
-
-      toaster.create({
-        title: "Criada",
-        description: "Sua tarefa foi editada com sucesso!",
-        type: "success",
-      });
-
-      refetchTasks();
-      handleClose();
-    } catch {
-      toaster.create({
-        title: "Erro",
-        description: "Erro ao editar tarefa",
-        type: "error",
-      });
-    }
+    });
+    handleClose();
   }
 
   useEffect(() => {
