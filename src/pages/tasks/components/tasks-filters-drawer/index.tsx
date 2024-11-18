@@ -104,18 +104,30 @@ export function TasksFiltersDrawer() {
             />
           </Field>
           <Flex>
-            <Button variant="plain" onClick={() => reset()}>
+            <Button
+              aria-label="resetar filtros"
+              variant="plain"
+              onClick={() => reset()}
+            >
               Resetar Filtros
             </Button>
           </Flex>
         </DrawerBody>
         <DrawerFooter>
           <DrawerActionTrigger asChild>
-            <Button variant="subtle" isDisabled={isSubmitting}>
+            <Button
+              aria-label="Cancelar edição"
+              variant="subtle"
+              isDisabled={isSubmitting}
+            >
               Cancelar
             </Button>
           </DrawerActionTrigger>
-          <Button type="submit" isLoading={isSubmitting}>
+          <Button
+            aria-label="Confirmar edição"
+            type="submit"
+            isLoading={isSubmitting}
+          >
             Editar
           </Button>
         </DrawerFooter>

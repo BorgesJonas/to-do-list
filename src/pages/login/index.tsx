@@ -8,6 +8,7 @@ export function Login() {
     <HStack>
       <Heading>This is the Login Page</Heading>
       <Button
+        aria-label="Entrar na plataforma"
         variant="subtle"
         onClick={() => loginWithRedirect({ appState: { returnTo: "/tasks" } })}
       >

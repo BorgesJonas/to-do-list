@@ -44,6 +44,7 @@ export function DeleteButton({ taskId }: DeletePopoverProps) {
           <Flex width="100%" justifyContent="flex-end">
             <Button
               size="xs"
+              aria-label="Confirmar deleção"
               colorPalette="red"
               isLoading={isLoading}
               onClick={handleDelete}

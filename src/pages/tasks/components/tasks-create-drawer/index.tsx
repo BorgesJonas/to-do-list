@@ -72,11 +72,19 @@ export function TasksCreateDrawer() {
           </DrawerBody>
           <DrawerFooter>
             <DrawerActionTrigger asChild>
-              <Button variant="subtle" isDisabled={isSubmitting}>
+              <Button
+                aria-label="Cancelar criação"
+                variant="subtle"
+                isDisabled={isSubmitting}
+              >
                 Cancelar
               </Button>
             </DrawerActionTrigger>
-            <Button type="submit" isLoading={isSubmitting}>
+            <Button
+              aria-label="Confirmar envio"
+              type="submit"
+              isLoading={isSubmitting}
+            >
               Salvar
             </Button>
           </DrawerFooter>
