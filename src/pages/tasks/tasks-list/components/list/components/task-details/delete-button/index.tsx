@@ -1,5 +1,4 @@
 import { FiTrash2 } from "react-icons/fi";
-import { useState } from "react";
 import {
   PopoverArrow,
   PopoverBody,
@@ -11,26 +10,31 @@ import { Flex, IconButton, Text } from "@chakra-ui/react";
 import { Button } from "@/components/button";
 import { DeletePopoverProps } from "./types";
 import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
+import { useState } from "@/hooks/use-state";
 
 export function DeleteButton({ taskId }: DeletePopoverProps) {
   const { onDeleteTask } = useTasksContext();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isPopoverVisible, setPopoverVisible] = useState(false);
+  const [state, setState] = useState({
+    isLoading: false,
+    isPopoverVisible: false,
+  });
+
+  const { isLoading, isPopoverVisible } = state;
 
   function handlePopoverVisible() {
-    setPopoverVisible(!isPopoverVisible);
+    setState({ isPopoverVisible: !isPopoverVisible });
   }
 
   async function handleDelete() {
-    setIsLoading(true);
+    setState({ isLoading: true });
     await onDeleteTask(taskId);
-    setIsLoading(false);
+    setState({ isLoading: false });
   }
 
   return (
     <PopoverRoot
       open={isPopoverVisible}
-      onOpenChange={(e) => setPopoverVisible(e.open)}
+      onOpenChange={(e) => setState({ isPopoverVisible: e.open })}
     >
       <PopoverTrigger asChild>
         <IconButton variant="solid" onClick={handlePopoverVisible}>

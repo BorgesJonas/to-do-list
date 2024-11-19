@@ -13,8 +13,8 @@ export function Actions() {
     <HStack gap={4}>
       {isLoading ? (
         <>
-          <Skeleton height={4} width={200} />
-          <SkeletonCircle size={8} />
+          <Skeleton data-testid="user-info-loader" height={4} width={200} />
+          <SkeletonCircle data-testid="user-avatar-loader" size={8} />
         </>
       ) : (
         <>
@@ -30,7 +30,13 @@ export function Actions() {
             </IconButton>
           </Tooltip>
           <p>{user?.email}</p>
-          <Avatar size="xs" name="Logo" src={user?.picture} />
+          <Avatar
+            size="xs"
+            name="Logo"
+            src={user?.picture}
+            aria-label="Logo do usuário"
+            data-testid="user-avatar"
+          />
         </>
       )}
     </HStack>
