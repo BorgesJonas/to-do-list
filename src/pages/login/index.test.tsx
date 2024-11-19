@@ -38,15 +38,4 @@ describe("Login Component", () => {
       appState: { returnTo: "/tasks" },
     });
   });
-
-  it("navigates to /tasks when authenticated", () => {
-    vi.mocked(useAuth0).mockReturnValue({
-      ...vi.mocked(useAuth0)(),
-      isAuthenticated: true,
-    } as any); // eslint-disable-line
-
-    customRender(<Login />);
-
-    expect(mockNavigate).toHaveBeenCalledWith("/tasks");
-  });
 });

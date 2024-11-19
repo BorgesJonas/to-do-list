@@ -17,7 +17,7 @@ export function TaskProvider({ children }: PropsWithChildren) {
   const { isEditDrawerOpen } = state;
 
   const { isLoading, data, error, refetch } = useGet<Task>(`tasks/${id}`);
-  console.log("DATA", data);
+
   function handleEditTaskDrawerVisible() {
     setState({ isEditDrawerOpen: !isEditDrawerOpen });
   }

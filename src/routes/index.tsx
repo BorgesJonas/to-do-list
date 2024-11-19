@@ -5,24 +5,30 @@ import { Login } from "@/pages/login";
 import { AppLayout } from "@/components/app-layout";
 import { TasksList } from "@/pages/tasks/tasks-list";
 import { TaskDetails } from "@/pages/tasks/task-details";
+import { AuthValidator } from "@/components/auth-validator";
 
 export const routes = createBrowserRouter([
   {
     children: [
       {
-        path: "/",
-        element: <Login />,
-      },
-      {
-        element: <AppLayout />,
+        element: <AuthValidator />,
         children: [
           {
-            path: "/tasks",
-            element: <TasksList />,
+            path: "/",
+            element: <Login />,
           },
           {
-            path: "/tasks/:id",
-            element: <TaskDetails />,
+            element: <AppLayout />,
+            children: [
+              {
+                path: "/tasks",
+                element: <TasksList />,
+              },
+              {
+                path: "/tasks/:id",
+                element: <TaskDetails />,
+              },
+            ],
           },
         ],
       },
