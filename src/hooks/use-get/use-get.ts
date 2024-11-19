@@ -12,7 +12,7 @@ interface UseGetResult<T> extends useGetState<T> {
   refetch: () => void;
 }
 
-function useGet<T>(url: string): UseGetResult<T> {
+export function useGet<T>(url: string): UseGetResult<T> {
   const [state, setState] = useState<useGetState<T>>({
     data: null,
     isLoading: false,
@@ -43,5 +43,3 @@ function useGet<T>(url: string): UseGetResult<T> {
 
   return { ...state, refetch: handleGetData };
 }
-
-export default useGet;

@@ -21,7 +21,7 @@ describe("Login Component", () => {
       user: undefined,
       logout: vi.fn(),
       getAccessTokenSilently: vi.fn(),
-    } as any);
+    } as any); // eslint-disable-line
 
     vi.mocked(useNavigate).mockReturnValue(mockNavigate);
   });
@@ -43,7 +43,7 @@ describe("Login Component", () => {
     vi.mocked(useAuth0).mockReturnValue({
       ...vi.mocked(useAuth0)(),
       isAuthenticated: true,
-    } as any);
+    } as any); // eslint-disable-line
 
     customRender(<Login />);
 

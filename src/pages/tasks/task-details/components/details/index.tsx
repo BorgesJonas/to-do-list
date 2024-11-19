@@ -1,7 +1,7 @@
 import { prioritiesLabels, statusLabels } from "@/common/consts";
 import { formatDate } from "@/common/formatters";
 import { Tooltip } from "@/components/tooltip";
-import useGet from "@/hooks/use-get/use-get";
+import { useGet } from "@/hooks/use-get/use-get";
 import { TasksEditDrawer } from "@/pages/tasks/components/tasks-edit-drawer";
 import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
 import { Task } from "@/types/task";
