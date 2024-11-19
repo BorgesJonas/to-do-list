@@ -4,6 +4,7 @@ import { customRender } from "@/tests/custom-render";
 import { Button } from "./";
 import { Provider } from "../provider";
 import { ButtonProps } from "./types";
+import userEvent from "@testing-library/user-event";
 
 function renderComponent(props?: ButtonProps) {
   return customRender(
@@ -19,10 +20,10 @@ describe("Button component", () => {
     expect(screen.getByText(/click me/i)).toBeInTheDocument();
   });
 
-  it("should call onClick when clicked", () => {
+  it("should call onClick when clicked", async () => {
     const handleClick = vi.fn();
     renderComponent({ onClick: handleClick });
-    fireEvent.click(screen.getByText(/click me/i));
+    await userEvent.click(screen.getByText(/click me/i));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
