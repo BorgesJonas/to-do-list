@@ -14,19 +14,18 @@ import {
   DrawerTitle,
 } from "@/components/drawer";
 
-import { FormValues, TasksEditDrawerProps } from "./types";
-import { schema } from "./schema";
-import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
-import { TasksForm } from "../tasks-form";
-import { Task } from "@/types/task";
+import { FormValues } from "./types";
+
 import { TasksStatus } from "@/enums/tasks-status";
 import { TasksPriorities } from "@/enums/tasks-priorities";
+import { useTaskContext } from "@/pages/tasks/task-details/contexts/task-context";
+import { TasksForm } from "@/pages/tasks/components/tasks-form";
+import { schema } from "@/pages/tasks/components/tasks-form/schema";
 
-export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
-  const { onEditTask } = useTasksContext();
+export function TasksEditDrawer() {
+  const { task, isEditDrawerOpen, onEditTask, onEditTaskDrawerVisible } =
+    useTaskContext();
   const drawerRef = useRef<HTMLDivElement>(null);
-  const { selectedTask, onEditTaskDrawerVisible, isEditDrawerOpen } =
-    useTasksContext();
 
   const methods = useForm<FormValues>({
     resolver: yupResolver(schema),
@@ -40,13 +39,13 @@ export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
   } = methods;
 
   function handleClose() {
-    onEditTaskDrawerVisible({} as Task);
+    onEditTaskDrawerVisible();
     reset();
   }
 
   async function onSubmit(data: FormValues) {
     await onEditTask({
-      id: selectedTask.id,
+      id: task.id,
       title: data.title,
       due_date: data.dueDate,
       status: data.status[0] as TasksStatus,
@@ -54,20 +53,18 @@ export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
       description: data.description,
     });
 
-    if (onEditSuccess) onEditSuccess();
-
     handleClose();
   }
 
   useEffect(() => {
-    if (selectedTask) {
-      setValue("title", selectedTask.title);
-      setValue("dueDate", selectedTask.due_date);
-      setValue("priority", [selectedTask.priority]);
-      setValue("status", [selectedTask.status]);
-      setValue("description", selectedTask.description);
+    if (task) {
+      setValue("title", task.title);
+      setValue("dueDate", task.due_date);
+      setValue("priority", [task.priority]);
+      setValue("status", [task.status]);
+      setValue("description", task.description);
     }
-  }, [setValue, selectedTask]);
+  }, [setValue, task]);
 
   return (
     <DrawerRoot

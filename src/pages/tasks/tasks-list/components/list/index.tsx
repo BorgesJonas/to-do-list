@@ -1,5 +1,5 @@
 import { Card, Group } from "@chakra-ui/react";
-import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
+import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context";
 import { TasksLoader } from "./components/tasks-loader";
 import { Tasks } from "@/types/tasks";
 import { TaskDetails } from "./components/task-details";

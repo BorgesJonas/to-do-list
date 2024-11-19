@@ -24,6 +24,7 @@ export function useGet<T>(url: string): UseGetResult<T> {
       setState({ isLoading: true });
       const response = await service.get(url);
       const result = response.data;
+      console.log("RESPONSE", response);
       setState({ data: result });
     } catch (apiError) {
       setState({

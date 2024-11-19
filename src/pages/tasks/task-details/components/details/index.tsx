@@ -1,38 +1,26 @@
 import { prioritiesLabels, statusLabels } from "@/common/consts";
 import { formatDate } from "@/common/formatters";
 import { Tooltip } from "@/components/tooltip";
-import { useGet } from "@/hooks/use-get";
-import { TasksEditDrawer } from "@/pages/tasks/components/tasks-edit-drawer";
-import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
-import { Task } from "@/types/task";
 import { Card, Flex, Grid, GridItem, IconButton, Text } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { IoArrowBack } from "react-icons/io5";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { DeleteButton } from "./components/delete-button";
+import { useTaskContext } from "@/pages/tasks/task-details/contexts/task-context";
 
 export function Details() {
   const navigate = useNavigate();
-  const { onEditTaskDrawerVisible } = useTasksContext();
-  const { id } = useParams<{ id: string }>();
+  const { task, isLoading, onEditTaskDrawerVisible } = useTaskContext();
 
-  const { isLoading, data, error, refetch } = useGet<Task>(`tasks/${id}`);
-  const isActionsDisabled = !data;
+  const isActionsDisabled = !task;
 
   function handleGoBack() {
     navigate(-1);
   }
 
-  function handleEditTask() {
-    onEditTaskDrawerVisible(data as Task);
+  if (isLoading) {
+    return <p>Loading</p>;
   }
-
-  useEffect(() => {
-    if (error) {
-      console.log("Error");
-    }
-  }, [error]);
 
   return (
     <>
@@ -43,7 +31,7 @@ export function Details() {
               <IconButton variant="ghost" onClick={handleGoBack}>
                 <IoArrowBack />
               </IconButton>
-              <Card.Title fontSize="xl">{data?.title}</Card.Title>
+              <Card.Title fontSize="xl">{task?.title}</Card.Title>
             </Flex>
 
             <Flex>
@@ -51,14 +39,14 @@ export function Details() {
                 <IconButton
                   variant="ghost"
                   disabled={isActionsDisabled}
-                  onClick={handleEditTask}
+                  onClick={onEditTaskDrawerVisible}
                 >
                   <FiEdit color="green" />
                 </IconButton>
               </Tooltip>
               <Tooltip disabled={isActionsDisabled} content="Deletar">
                 <DeleteButton
-                  taskId={data?.id}
+                  taskId={task?.id}
                   onDeleteSuccess={handleGoBack}
                 />
               </Tooltip>
@@ -69,25 +57,24 @@ export function Details() {
           ) : (
             <Grid gap={2}>
               <GridItem>
-                <Text>Data de vencimento: {formatDate(data?.due_date)}</Text>
+                <Text>Data de vencimento: {formatDate(task?.due_date)}</Text>
               </GridItem>
               <GridItem>
-                <Text>Prioridade: {prioritiesLabels[data?.priority]}</Text>
+                <Text>Prioridade: {prioritiesLabels[task?.priority]}</Text>
               </GridItem>
               <GridItem mb={6}>
-                <Text>Status: {statusLabels[data?.status]}</Text>
+                <Text>Status: {statusLabels[task?.status]}</Text>
               </GridItem>
               <GridItem>
                 <Text>Descrição:</Text>
               </GridItem>
               <GridItem>
-                <Text>{data?.description}</Text>
+                <Text>{task?.description}</Text>
               </GridItem>
             </Grid>
           )}
         </Card.Body>
       </Card.Root>
-      <TasksEditDrawer onEditSuccess={refetch} />
     </>
   );
 }

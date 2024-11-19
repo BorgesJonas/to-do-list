@@ -9,7 +9,7 @@ import {
 import { Flex, IconButton, Text } from "@chakra-ui/react";
 import { Button } from "@/components/button";
 import { DeletePopoverProps } from "./types";
-import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
+import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context";
 import { useState } from "@/hooks/use-state";
 
 export function DeleteButton({ taskId }: DeletePopoverProps) {

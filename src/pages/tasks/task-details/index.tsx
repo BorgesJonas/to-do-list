@@ -1,10 +1,11 @@
 import { Flex } from "@chakra-ui/react";
-import { TasksProvider } from "@/pages/tasks/contexts/tasks-context";
 import { Details } from "./components/details";
+import { TasksEditDrawer } from "./components/tasks-edit-drawer";
+import { TaskProvider } from "./contexts/task-context";
 
 export function TaskDetails() {
   return (
-    <TasksProvider>
+    <TaskProvider>
       <Flex
         as="main"
         overflow="auto"
@@ -13,7 +14,8 @@ export function TaskDetails() {
         py={8}
       >
         <Details />
+        <TasksEditDrawer />
       </Flex>
-    </TasksProvider>
+    </TaskProvider>
   );
 }

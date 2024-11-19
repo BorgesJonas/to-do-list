@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button } from "@/components/button";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,45 +14,65 @@ import {
   DrawerTitle,
 } from "@/components/drawer";
 
-import { FormValues } from "./types";
-import { schema } from "./schema";
-import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
-import { TasksForm } from "../tasks-form";
+import { schema } from "@/pages/tasks/components/tasks-form/schema";
+import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context";
+import { TasksForm } from "@/pages/tasks/components/tasks-form";
+import { Task } from "@/types/task";
+import { TasksStatus } from "@/enums/tasks-status";
+import { TasksPriorities } from "@/enums/tasks-priorities";
 
-export function TasksCreateDrawer() {
-  const { onCreateTask } = useTasksContext();
+import { FormValues, TasksEditDrawerProps } from "./types";
+
+export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
+  const { onEditTask } = useTasksContext();
   const drawerRef = useRef<HTMLDivElement>(null);
-  const { isCreateDrawerOpen, onCreateTaskDrawerVisible } = useTasksContext();
+  const { selectedTask, onEditTaskDrawerVisible, isEditDrawerOpen } =
+    useTasksContext();
 
   const methods = useForm<FormValues>({
     resolver: yupResolver(schema),
   });
 
   const {
+    setValue,
     reset,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
 
   function handleClose() {
-    onCreateTaskDrawerVisible();
+    onEditTaskDrawerVisible({} as Task);
     reset();
   }
 
   async function onSubmit(data: FormValues) {
-    await onCreateTask({
+    await onEditTask({
+      id: selectedTask.id,
       title: data.title,
       due_date: data.dueDate,
-      priority: data.priority[0],
-      status: data.status[0],
+      status: data.status[0] as TasksStatus,
+      priority: data.priority[0] as TasksPriorities,
       description: data.description,
     });
+
+    if (onEditSuccess) onEditSuccess();
+
     handleClose();
   }
 
+  useEffect(() => {
+    if (selectedTask) {
+      setValue("title", selectedTask.title);
+      setValue("dueDate", selectedTask.due_date);
+      setValue("priority", [selectedTask.priority]);
+      setValue("status", [selectedTask.status]);
+      setValue("description", selectedTask.description);
+    }
+  }, [setValue, selectedTask]);
+
   return (
     <DrawerRoot
-      open={isCreateDrawerOpen}
+      open={isEditDrawerOpen}
       onOpenChange={handleClose}
       size={["full", "md"]}
     >
@@ -73,19 +93,15 @@ export function TasksCreateDrawer() {
           <DrawerFooter>
             <DrawerActionTrigger asChild>
               <Button
-                aria-label="Cancelar criação"
+                aria-label="Cancelar edição"
                 variant="subtle"
                 isDisabled={isSubmitting}
               >
                 Cancelar
               </Button>
             </DrawerActionTrigger>
-            <Button
-              aria-label="Confirmar envio"
-              type="submit"
-              isLoading={isSubmitting}
-            >
-              Salvar
+            <Button type="submit" isLoading={isSubmitting}>
+              Editar
             </Button>
           </DrawerFooter>
           <DrawerCloseTrigger />

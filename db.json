@@ -9,12 +9,12 @@
       "id": "dda1"
     },
     {
-      "id": "b8bb",
-      "title": "Nova Tarefa",
+      "title": "Nova Tarefa 2",
       "due_date": "2025-10-05",
-      "priority": "low",
       "status": "todo",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae porttitor turpis. Suspendisse sit amet dignissim quam. Integer sagittis urna mi, dictum placerat tellus semper ac. Quisque malesuada, mi sit amet mattis posuere, elit velit volutpat sapien, non semper sem orci non velit. Nam a sem turpis. Cras accumsan purus id mauris tempus, id ultrices velit cursus. Quisque ante nibh, venenatis nec quam id, rutrum imperdiet ex. Integer lobortis,"
+      "priority": "low",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae porttitor turpis. Suspendisse sit amet dignissim quam. Integer sagittis urna mi, dictum placerat tellus semper ac. Quisque malesuada, mi sit amet mattis posuere, elit velit volutpat sapien, non semper sem orci non velit. Nam a sem turpis. Cras accumsan purus id mauris tempus, id ultrices velit cursus. Quisque ante nibh, venenatis nec quam id, rutrum imperdiet ex. Integer lobortis,",
+      "id": "b8bb"
     }
   ]
 }

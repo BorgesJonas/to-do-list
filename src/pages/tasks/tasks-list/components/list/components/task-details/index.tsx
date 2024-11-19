@@ -8,7 +8,7 @@ import { prioritiesLabels, statusLabels } from "@/common/consts";
 import { formatDate } from "@/common/formatters";
 import { prioritiesTagsSchema, statusTagsSchema } from "./consts";
 import { DeleteButton } from "./delete-button";
-import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
+import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context";
 import { useNavigate } from "react-router-dom";
 
 export function TaskDetails({ task }: TaskDetailsProps) {
