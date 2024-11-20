@@ -1,10 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Login } from "@/pages/login";
-
 import { AppLayout } from "@/components/app-layout";
-import { TasksList } from "@/pages/tasks/tasks-list";
-import { TaskDetails } from "@/pages/tasks/task-details";
 import { AuthValidator } from "@/components/auth-validator";
 
 export const routes = createBrowserRouter([
@@ -15,18 +11,35 @@ export const routes = createBrowserRouter([
         children: [
           {
             path: "/",
-            element: <Login />,
+            lazy: async () => {
+              const { Login } = await import("../pages/login");
+              return { Component: Login };
+            },
           },
           {
             element: <AppLayout />,
+            lazy: async () => {
+              const { AppLayout } = await import("../components/app-layout");
+              return { Component: AppLayout };
+            },
             children: [
               {
                 path: "/tasks",
-                element: <TasksList />,
+                lazy: async () => {
+                  const { TasksList } = await import(
+                    "../pages/tasks/tasks-list"
+                  );
+                  return { Component: TasksList };
+                },
               },
               {
                 path: "/tasks/:id",
-                element: <TaskDetails />,
+                lazy: async () => {
+                  const { TaskDetails } = await import(
+                    "../pages/tasks/task-details"
+                  );
+                  return { Component: TaskDetails };
+                },
               },
             ],
           },

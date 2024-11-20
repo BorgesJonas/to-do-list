@@ -1,50 +1,57 @@
-# React + TypeScript + Vite
+# TO DO LIST APPLICATION
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Está é uma aplicação React para gerênciamento de tarefas. Ela utiliza Chakra UI como biblioteca de componentes, React Hook Form e Yup para validação de formulários, e JSON Server para simular uma API. A autenticação é gerenciada pelo Auth0.
 
-Currently, two official plugins are available:
+## Configuração do Auth0
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Crie uma conta no [Auth0](https://auth0.com/) se ainda não tiver uma.
 
-## Expanding the ESLint configuration
+2. No dashboard do Auth0, crie uma nova aplicação:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+   - Clique em "Applications" no menu lateral.
+   - Clique em "Create Application".
+   - Dê um nome à sua aplicação.
+   - Selecione "Single Page Web Applications" como tipo de aplicação.
+   - Clique em "Create".
 
-- Configure the top-level `parserOptions` property like this:
+3. Na página de configurações da aplicação:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+   - Em "Allowed Callback URLs", adicione `http://localhost:5173/`.
+   - Em "Allowed Logout URLs", adicione `http://localhost:5173/`.
+   - Em "Allowed Web Origins", adicione `http://localhost:5173/`.
+   - Se a aplicação rodar em uma porta diferente, substitua 5173 pela porta correta.
+   - Salve as alterações.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+4. Anote o "Domain" e "Client ID" fornecidos na página de configurações.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Para mais detalhes sobre a configuração do Auth0, consulte a [documentação oficial](https://auth0.com/docs/quickstart/spa/react).
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Configuração do Projeto
+
+1. Clone o repositório do projeto.
+
+2. Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+
+   - VITE_AUTH0_DOMAIN=seu_dominio_auth0
+   - VITE_AUTH0_CLIENT_ID=seu_client_id_auth0
+
+Substitua `seu_dominio_auth0` e `seu_client_id_auth0` pelos valores obtidos no dashboard do Auth0.
+
+3. Instale as dependências:
+
+   - npm install
+
+## Executando a Aplicação
+
+Para iniciar a aplicação e o servidor JSON simultaneamente, execute:
+
+- npm run dev
+
+Isso iniciará o servidor de desenvolvimento React e o JSON Server em concorrência.
+
+## Recursos Adicionais
+
+- [Documentação do Chakra UI](https://chakra-ui.com/docs/getting-started)
+- [Documentação do React Hook Form](https://react-hook-form.com/get-started)
+- [Documentação do Yup](https://github.com/jquense/yup)
+- [Documentação do JSON Server](https://github.com/typicode/json-server)
