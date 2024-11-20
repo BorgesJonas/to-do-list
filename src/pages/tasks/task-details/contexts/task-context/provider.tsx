@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import { TaskContext } from "./context";
 import { Task } from "@/types/task";
 import { useState } from "@/hooks/use-state";
@@ -60,6 +60,16 @@ export function TaskProvider({ children }: PropsWithChildren) {
       });
     }
   }
+
+  useEffect(() => {
+    if (error) {
+      toaster.create({
+        title: "Erro",
+        description: "Erro ao buscars a tarefa",
+        type: "error",
+      });
+    }
+  }, [error]);
 
   return (
     <TaskContext.Provider

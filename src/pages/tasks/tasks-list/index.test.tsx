@@ -9,10 +9,7 @@ import { TasksStatus } from "@/enums/tasks-status";
 import { Task } from "@/types/task";
 import { TasksPriorities } from "@/enums/tasks-priorities";
 import userEvent from "@testing-library/user-event";
-import {
-  prioritiesLabels,
-  statusLabels,
-} from "../components/tasks-form/consts";
+import { prioritiesLabels, statusLabels } from "@/pages/tasks/common/consts";
 import { formatDate } from "@/common/formatters";
 
 import { TasksList } from ".";

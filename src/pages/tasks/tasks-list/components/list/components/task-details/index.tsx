@@ -9,10 +9,7 @@ import { prioritiesTagsSchema, statusTagsSchema } from "./consts";
 import { DeleteButton } from "./delete-button";
 import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context";
 import { useNavigate } from "react-router-dom";
-import {
-  statusLabels,
-  prioritiesLabels,
-} from "@/pages/tasks/components/tasks-form/consts";
+import { statusLabels, prioritiesLabels } from "@/pages/tasks/common/consts";
 import { TaskDetailsProps } from "./types";
 
 export function TaskDetails({ task }: TaskDetailsProps) {
