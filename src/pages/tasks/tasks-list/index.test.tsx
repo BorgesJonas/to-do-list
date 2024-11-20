@@ -43,7 +43,7 @@ describe("TasksList component", () => {
 
   it("Should show empty message with api return no tasks", async () => {
     server.use(
-      http.get(`${API_URL}/tasks?_page=1&_per_page=10`, () => {
+      http.get(`${API_URL}/tasks`, () => {
         return HttpResponse.json(mockedEmptyResponse);
       })
     );
@@ -321,7 +321,7 @@ describe("TasksList component", () => {
     const confirmDeleteButton = screen.getByRole("button", {
       name: "Confirmar deleção",
     });
-    screen.debug(confirmDeleteButton);
+
     await userEvent.click(confirmDeleteButton);
 
     const emptyMessage = await screen.findByText(EMPTY_TASKS_MESSAGE);
