@@ -32,22 +32,32 @@ Para mais detalhes sobre a configuração do Auth0, consulte a [documentação o
 
 2. Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
 
-   - VITE_AUTH0_DOMAIN=seu_dominio_auth0
-   - VITE_AUTH0_CLIENT_ID=seu_client_id_auth0
+   `VITE_AUTH0_DOMAIN=seu_dominio_auth0`
+   `VITE_AUTH0_CLIENT_ID=seu_client_id_auth0`
 
 Substitua `seu_dominio_auth0` e `seu_client_id_auth0` pelos valores obtidos no dashboard do Auth0.
 
 3. Instale as dependências:
 
-   - npm install
+`npm install`
 
 ## Executando a Aplicação
 
 Para iniciar a aplicação e o servidor JSON simultaneamente, execute:
 
-- npm run dev
+`npm run dev`
 
 Isso iniciará o servidor de desenvolvimento React e o JSON Server em concorrência.
+
+## Executando os Testes
+
+Para rodar os testes unitários:
+
+`npm run test`
+
+Para gerar um relatório de cobertura de testes:
+
+`npm run test:coverage`
 
 ## Recursos Adicionais
 
