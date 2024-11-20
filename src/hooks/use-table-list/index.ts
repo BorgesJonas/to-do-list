@@ -1,21 +1,40 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback, useMemo } from "react";
 import { service } from "@/service";
 import { UseTableResult, Pagination } from "./types";
 import { defaultPagination } from "./consts";
+import { useState } from "../use-state";
+
+// const [data, setData] = useState<T[]>([]);
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [error, setError] = useState<Error | null>(null);
+//   const [pagination, setPagination] = useState<Pagination>(defaultPagination);
+//   const [params, setParams] = useState<P | undefined>(initialParams);
+
+interface UseTableListState<T, P> {
+  data: T[];
+  isLoading: boolean;
+  error: Error | null;
+  pagination: Pagination;
+  params: P | undefined;
+}
 
 export function useTableList<T, P extends object>(
   url: string,
   initialParams?: P
 ): UseTableResult<T, P> {
-  const [data, setData] = useState<T[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-  const [pagination, setPagination] = useState<Pagination>(defaultPagination);
-  const [params, setParams] = useState<P | undefined>(initialParams);
+  const [state, setState] = useState<UseTableListState<T, P>>({
+    data: [],
+    isLoading: false,
+    error: null,
+    pagination: defaultPagination,
+    params: initialParams,
+  });
+
+  const { data, isLoading, error, pagination, params } = state;
+  const { currentPage, pageSize } = pagination;
 
   const handleGetData = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
+    setState({ isLoading: true, error: null });
 
     try {
       const response = await service.get(url, {
@@ -26,26 +45,45 @@ export function useTableList<T, P extends object>(
         },
       });
 
-      setData(response.data.data);
-      setPagination((prev) => ({ ...prev, total: response.data.items }));
-    } catch (err) {
-      setError(err instanceof Error ? err : new Error("Error while fetching"));
+      setState({
+        data: response.data.data,
+        pagination: { ...pagination, total: response.data.items },
+      });
+    } catch (apiError) {
+      setState({
+        error:
+          apiError instanceof Error
+            ? apiError
+            : new Error("Error while fetching"),
+      });
     } finally {
-      setIsLoading(false);
+      setState({ isLoading: false });
     }
-  }, [url, params, pagination.currentPage, pagination.pageSize]);
+  }, [params, pagination, url]);
 
-  const setCurrentPage = useCallback((page: number) => {
-    setPagination((prev) => ({ ...prev, currentPage: page }));
-  }, []);
+  const setCurrentPage = useCallback(
+    (page: number) => {
+      setState({ pagination: { ...pagination, currentPage: page } });
+    },
+    [pagination]
+  );
 
-  const setPageSize = useCallback((size: number) => {
-    setPagination((prev) => ({ ...prev, pageSize: size, currentPage: 1 }));
-  }, []);
+  const setPageSize = useCallback(
+    (size: number) => {
+      setState({
+        pagination: { ...pagination, pageSize: size, currentPage: 1 },
+      });
+    },
+    [pagination]
+  );
+
+  const setParams = (updatedParams: P | undefined) => {
+    setState({ params: updatedParams });
+  };
 
   useEffect(() => {
     handleGetData();
-  }, [handleGetData]);
+  }, [params, currentPage, pageSize]);
 
   return {
     isLoading,

@@ -71,7 +71,7 @@ describe("AuthValidator component", () => {
     } as Auth0ContextInterface<User>);
 
     renderComponent();
-    expect(await screen.findByText("Carregando...")).toBeInTheDocument();
+    expect(await screen.findByTestId(/auth-loader/i)).toBeInTheDocument();
   });
 
   it("Should render Outlet when not loading and authenticated", () => {

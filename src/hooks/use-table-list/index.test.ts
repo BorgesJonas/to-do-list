@@ -13,7 +13,11 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-describe("useTableList", () => {
+afterAll(() => {
+  vi.useRealTimers();
+});
+
+describe("useTableList hook", () => {
   const mockUrl = "https://api.example.com/data";
   const mockInitialParams = { filter: "test" };
   const mockResponse = {
@@ -43,7 +47,6 @@ describe("useTableList", () => {
     await act(async () => {
       await vi.runAllTimersAsync();
     });
-    console.log("result.current.data", JSON.stringify(result.current.data));
     expect(result.current.isLoading).toBe(false);
     expect(result.current.data.data).toEqual(mockResponse.data.data);
     expect(result.current.pagination.total).toBe(mockResponse.data.data.items);

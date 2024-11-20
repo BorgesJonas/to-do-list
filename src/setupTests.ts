@@ -8,10 +8,6 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-vi.mock("*.css", () => ({}));
-vi.mock("*.scss", () => ({}));
-vi.mock("*.less", () => ({}));
-
 const originalConsoleError = console.error;
 
 console.error = function (...data) {

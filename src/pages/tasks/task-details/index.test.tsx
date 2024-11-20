@@ -1,6 +1,6 @@
 import { service } from "@/service";
 import { server } from "@/setupTests";
-import { screen } from "@testing-library/react";
+import { act, screen, waitFor } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
 import { describe, vi } from "vitest";
 import { TasksPriorities } from "@/enums/tasks-priorities";
@@ -35,7 +35,7 @@ describe("TaskDetails component", () => {
   useParams.mockReturnValue({ id: taskId });
 
   const mockedTask: Task = {
-    id: "user-id",
+    id: taskId,
     title: "Task title",
     due_date: "2024-11-19",
     status: TasksStatus.TODO,
@@ -101,7 +101,7 @@ describe("TaskDetails component", () => {
       http.get(`${API_URL}/tasks/${taskId}`, () => {
         return HttpResponse.json(mockedTask);
       }),
-      http.delete(`${API_URL}/tasks/${taskId}`, async () => {
+      http.delete(`${API_URL}/tasks/${taskId}`, () => {
         return HttpResponse.json(mockedTask);
       })
     );
@@ -127,10 +127,12 @@ describe("TaskDetails component", () => {
 
     await userEvent.click(confirmButton);
 
-    expect(mockNavigate).toHaveBeenCalledWith("/tasks");
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith("/tasks");
+    });
   });
 
-  it.only("Should edit task ", async () => {
+  it("Should edit task ", async () => {
     server.use(
       http.put(`${API_URL}/tasks/${taskId}`, async () => {
         return HttpResponse.json(mockedTask);

@@ -31,7 +31,7 @@ export function AuthValidator() {
           justifyContent="center"
           alignItems="center"
         >
-          <Spinner />
+          <Spinner data-testid="auth-loader" />
         </Flex>
       ) : (
         <Outlet />
