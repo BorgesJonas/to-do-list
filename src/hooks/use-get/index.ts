@@ -1,16 +1,7 @@
 import { service } from "@/service";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useState } from "../use-state";
-
-interface useGetState<T> {
-  data: T | null;
-  isLoading: boolean;
-  error: Error | null;
-}
-
-interface UseGetResult<T> extends useGetState<T> {
-  refetch: () => void;
-}
+import { useGetState, UseGetResult } from "./types";
 
 export function useGet<T>(url: string): UseGetResult<T> {
   const [state, setState] = useState<useGetState<T>>({
@@ -19,7 +10,7 @@ export function useGet<T>(url: string): UseGetResult<T> {
     error: null,
   });
 
-  const handleGetData = async () => {
+  const handleGetData = useCallback(async () => {
     try {
       setState({ isLoading: true });
       const response = await service.get(url);
@@ -35,7 +26,7 @@ export function useGet<T>(url: string): UseGetResult<T> {
     } finally {
       setState({ isLoading: false });
     }
-  };
+  }, [url]);
 
   useEffect(() => {
     handleGetData();
