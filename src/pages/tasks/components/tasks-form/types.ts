@@ -1,6 +1,7 @@
+import { RefObject } from "react";
+
 export interface TasksFormProps {
-  isOpen: boolean;
-  onClose: () => void;
+  drawerRef: RefObject<HTMLDivElement>;
 }
 
 export interface FormValues {

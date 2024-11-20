@@ -3,9 +3,9 @@ import { Input, Stack, Textarea } from "@chakra-ui/react";
 import { Controller, useFormContext } from "react-hook-form";
 import { PrioritiesSelect } from "../priorities-select";
 import { StatusSelect } from "../status-select";
-import { FormValues } from "./types";
+import { FormValues, TasksFormProps } from "./types";
 
-export function TasksForm({ drawerRef }) {
+export function TasksForm({ drawerRef }: TasksFormProps) {
   const {
     register,
     control,

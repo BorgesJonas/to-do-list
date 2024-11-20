@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { FORM_MESSAGES } from "@/pages/tasks/common/consts";
+import { FORM_MESSAGES } from "@/pages/tasks/components/tasks-form/consts";
 
 export const schema = yup.object().shape({
   title: yup.string().required(FORM_MESSAGES.TITLE_REQUIRED),

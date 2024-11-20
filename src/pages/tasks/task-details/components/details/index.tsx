@@ -6,7 +6,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { DeleteButton } from "./components/delete-button";
 import { useTaskContext } from "@/pages/tasks/task-details/contexts/task-context";
-import { prioritiesLabels } from "@/pages/tasks/common/consts";
+import { prioritiesLabels } from "@/pages/tasks/components/tasks-form/consts";
 
 export function Details() {
   const navigate = useNavigate();

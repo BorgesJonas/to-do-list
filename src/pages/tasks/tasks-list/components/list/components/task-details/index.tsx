@@ -9,7 +9,10 @@ import { prioritiesTagsSchema, statusTagsSchema } from "./consts";
 import { DeleteButton } from "./delete-button";
 import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context";
 import { useNavigate } from "react-router-dom";
-import { statusLabels, prioritiesLabels } from "@/pages/tasks/common/consts";
+import {
+  statusLabels,
+  prioritiesLabels,
+} from "@/pages/tasks/components/tasks-form/consts";
 import { TaskDetailsProps } from "./types";
 
 export function TaskDetails({ task }: TaskDetailsProps) {
@@ -40,7 +43,7 @@ export function TaskDetails({ task }: TaskDetailsProps) {
         </Text>
         <Flex gap={2}>
           <Text fontSize="sm">{formatDate(task.due_date)}</Text>
-          <Tag size="sm" colorPalette={statusTagsSchema[task.priority]}>
+          <Tag size="sm" colorPalette={statusTagsSchema[task.status]}>
             {statusLabels[task.status]}
           </Tag>
           <Tag size="sm" colorPalette={prioritiesTagsSchema[task.priority]}>
@@ -50,7 +53,11 @@ export function TaskDetails({ task }: TaskDetailsProps) {
       </Box>
       <Flex>
         <Tooltip content="Visualizar">
-          <IconButton variant="solid" onClick={handleRediretctToDetails}>
+          <IconButton
+            variant="solid"
+            aria-label="Visualizar tarefa"
+            onClick={handleRediretctToDetails}
+          >
             <FiEye color="tea" />
           </IconButton>
         </Tooltip>
@@ -58,7 +65,7 @@ export function TaskDetails({ task }: TaskDetailsProps) {
         <Tooltip content="Editar">
           <IconButton
             variant="solid"
-            aria-label="Editar task"
+            aria-label="Editar tarefa"
             onClick={handleEditTask}
           >
             <FiEdit color="green" />

@@ -9,7 +9,10 @@ import { TasksStatus } from "@/enums/tasks-status";
 import { Task } from "@/types/task";
 import { TasksPriorities } from "@/enums/tasks-priorities";
 import userEvent from "@testing-library/user-event";
-import { prioritiesLabels, statusLabels } from "../common/consts";
+import {
+  prioritiesLabels,
+  statusLabels,
+} from "../components/tasks-form/consts";
 import { formatDate } from "@/common/formatters";
 
 import { TasksList } from ".";
@@ -208,7 +211,7 @@ describe("TasksList component", () => {
     renderComponent();
     const taskTitle = await screen.findByText(mockedTask.title);
     expect(taskTitle).toBeVisible();
-    const editButton = screen.getByRole("button", { name: "Editar task" });
+    const editButton = screen.getByRole("button", { name: /editar tarefa/i });
     await userEvent.click(editButton);
     const drawerTitle = screen.getByRole("heading", { name: /nova tarefa/i });
     expect(drawerTitle).toBeVisible();
@@ -325,5 +328,135 @@ describe("TasksList component", () => {
 
     const emptyMessage = await screen.findByText(EMPTY_TASKS_MESSAGE);
     expect(emptyMessage).toBeVisible();
+  });
+
+  it("Should filter tasks", async () => {
+    const mockedTasks: Task[] = [
+      {
+        id: "task-id",
+        title: "First Task",
+        due_date: "2024-11-19",
+        status: TasksStatus.TODO,
+        priority: TasksPriorities.LOW,
+        description: "description",
+      },
+      {
+        id: "task-id-2",
+        title: "Second Task",
+        due_date: "2024-11-19",
+        status: TasksStatus.IN_PROGRESS,
+        priority: TasksPriorities.LOW,
+        description: "description",
+      },
+    ];
+
+    const getResponse = {
+      first: 1,
+      prev: null,
+      next: null,
+      last: 1,
+      pages: 1,
+      items: 2,
+      data: mockedTasks,
+    };
+
+    const filteredRespose = {
+      first: 1,
+      prev: null,
+      next: null,
+      last: 0,
+      pages: 0,
+      items: 0,
+      data: [mockedTasks[1]],
+    };
+
+    let isFirstGet = true;
+
+    server.use(
+      http.get(`${API_URL}/tasks`, () => {
+        if (isFirstGet) {
+          isFirstGet = false;
+          return HttpResponse.json(getResponse);
+        } else {
+          return HttpResponse.json(filteredRespose);
+        }
+      })
+    );
+
+    renderComponent();
+    let firstTaskTitle: HTMLElement | null = await screen.findByText(
+      mockedTasks[0].title
+    );
+    let secondTaskTitle = await screen.findByText(mockedTasks[1].title);
+    expect(firstTaskTitle).toBeVisible();
+    expect(secondTaskTitle).toBeVisible();
+
+    const createTaskDrawerButton = screen.getByRole("button", {
+      name: /filtrar tarefas/i,
+    });
+    await userEvent.click(createTaskDrawerButton);
+
+    const drawerTitle = screen.getByRole("heading", { name: /filtros/i });
+    expect(drawerTitle).toBeVisible();
+
+    const statusSelect = screen.getByRole("combobox", {
+      name: /status/i,
+    });
+
+    await userEvent.click(statusSelect);
+
+    const statusOption = screen.getByRole("option", {
+      name: statusLabels[TasksStatus.IN_PROGRESS],
+    });
+
+    expect(statusOption).toBeVisible();
+
+    await userEvent.click(statusOption);
+
+    const confirmFilter = screen.getByRole("button", { name: /filtrar/i });
+
+    await userEvent.click(confirmFilter);
+
+    firstTaskTitle = screen.queryByText(mockedTasks[0].title);
+    secondTaskTitle = await screen.findByText(mockedTasks[1].title);
+
+    expect(firstTaskTitle).not.toBeInTheDocument();
+    expect(secondTaskTitle).toBeInTheDocument();
+  });
+
+  it("Should navigate to details page", async () => {
+    const mockedTask: Task = {
+      id: "task-id",
+      title: "title",
+      due_date: "2024-11-19",
+      status: TasksStatus.TODO,
+      priority: TasksPriorities.LOW,
+      description: "description",
+    };
+    const getResponse = {
+      first: 1,
+      prev: null,
+      next: null,
+      last: 1,
+      pages: 1,
+      items: 1,
+      data: [mockedTask],
+    };
+
+    server.use(
+      http.get(`${API_URL}/tasks`, () => {
+        return HttpResponse.json(getResponse);
+      })
+    );
+
+    renderComponent();
+    const taskTitle = await screen.findByText(mockedTask.title);
+    expect(taskTitle).toBeVisible();
+
+    const viewButton = screen.getByRole("button", {
+      name: /visualizar tarefa/i,
+    });
+    await userEvent.click(viewButton);
+    expect(mockNavigate).toHaveBeenCalledWith(`/tasks/${mockedTask.id}`);
   });
 });

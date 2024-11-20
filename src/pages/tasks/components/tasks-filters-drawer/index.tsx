@@ -116,19 +116,15 @@ export function TasksFiltersDrawer() {
         <DrawerFooter>
           <DrawerActionTrigger asChild>
             <Button
-              aria-label="Cancelar edição"
+              aria-label="Cancelar filtros"
               variant="subtle"
               isDisabled={isSubmitting}
             >
               Cancelar
             </Button>
           </DrawerActionTrigger>
-          <Button
-            aria-label="Confirmar edição"
-            type="submit"
-            isLoading={isSubmitting}
-          >
-            Editar
+          <Button aria-label="Filtrar" type="submit" isLoading={isSubmitting}>
+            Filtrar
           </Button>
         </DrawerFooter>
         <DrawerCloseTrigger />
