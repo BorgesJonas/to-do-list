@@ -16,7 +16,7 @@ import { Controller, useForm } from "react-hook-form";
 import { PrioritiesSelect } from "../priorities-select";
 import { StatusSelect } from "../status-select";
 import { Flex, Input } from "@chakra-ui/react";
-import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
+import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context";
 import { FormValues } from "./types";
 import { TasksStatus } from "@/enums/tasks-status";
 import { TasksPriorities } from "@/enums/tasks-priorities";
@@ -116,19 +116,15 @@ export function TasksFiltersDrawer() {
         <DrawerFooter>
           <DrawerActionTrigger asChild>
             <Button
-              aria-label="Cancelar edição"
+              aria-label="Cancelar filtros"
               variant="subtle"
               isDisabled={isSubmitting}
             >
               Cancelar
             </Button>
           </DrawerActionTrigger>
-          <Button
-            aria-label="Confirmar edição"
-            type="submit"
-            isLoading={isSubmitting}
-          >
-            Editar
+          <Button aria-label="Filtrar" type="submit" isLoading={isSubmitting}>
+            Filtrar
           </Button>
         </DrawerFooter>
         <DrawerCloseTrigger />

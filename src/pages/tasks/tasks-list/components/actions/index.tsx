@@ -3,7 +3,7 @@ import { FaFilter } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 
 import { Button } from "@/components/button";
-import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
+import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context";
 
 export function Actions() {
   const { onCreateTaskDrawerVisible, onFilterDrawerVisible } =

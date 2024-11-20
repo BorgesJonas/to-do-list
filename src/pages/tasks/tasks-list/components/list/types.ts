@@ -1,6 +1,6 @@
-import { Tasks } from "@/types/tasks";
+import { Task } from "@/types/tasks";
 
 export interface TasksListProps {
   isLoading: boolean;
-  tasks: Tasks[];
+  tasks: Task[];
 }

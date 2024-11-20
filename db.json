@@ -1,20 +1,12 @@
 {
   "tasks": [
     {
-      "title": "Edit Tarefa Context",
-      "due_date": "2026-10-10",
-      "status": "in_progress",
-      "priority": "lowest",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae porttitor turpis. Suspendisse sit amet dignissim quam. Integer sagittis urna mi, dictum placerat tellus semper ac. Quisque malesuada, mi sit amet mattis posuere, elit velit volutpat sapien, non semper sem orci non velit. Nam a sem turpis. Cras accumsan purus id mauris tempus, id ultrices velit cursus. Quisque ante nibh, venenatis nec quam id, rutrum imperdiet ex. Integer lobortis,",
-      "id": "dda1"
-    },
-    {
-      "id": "b8bb",
-      "title": "Nova Tarefa",
-      "due_date": "2025-10-05",
-      "priority": "low",
+      "title": "Teste Title ",
+      "due_date": "2024-10-10",
       "status": "todo",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae porttitor turpis. Suspendisse sit amet dignissim quam. Integer sagittis urna mi, dictum placerat tellus semper ac. Quisque malesuada, mi sit amet mattis posuere, elit velit volutpat sapien, non semper sem orci non velit. Nam a sem turpis. Cras accumsan purus id mauris tempus, id ultrices velit cursus. Quisque ante nibh, venenatis nec quam id, rutrum imperdiet ex. Integer lobortis,"
+      "priority": "high",
+      "description": "teste ",
+      "id": "29a4"
     }
   ]
 }

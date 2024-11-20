@@ -24,7 +24,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading && !loadingText ? (
           <>
             <AbsoluteCenter display="inline-flex">
-              <Spinner size="inherit" color="inherit" />
+              <Spinner
+                size="inherit"
+                color="inherit"
+                data-testid="button-spinner"
+              />
             </AbsoluteCenter>
             <Span opacity={0}>{children}</Span>
           </>

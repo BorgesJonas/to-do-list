@@ -10,10 +10,10 @@ import {
 import { Flex, IconButton, Text } from "@chakra-ui/react";
 import { Button } from "@/components/button";
 import { DeletePopoverProps } from "./types";
-import { useTasksContext } from "@/pages/tasks/contexts/tasks-context";
+import { useTaskContext } from "@/pages/tasks/task-details/contexts/task-context";
 
 export function DeleteButton({ taskId, onDeleteSuccess }: DeletePopoverProps) {
-  const { onDeleteTask } = useTasksContext();
+  const { onDeleteTask } = useTaskContext();
   const [isLoading, setIsLoading] = useState(false);
   const [isPopoverVisible, setPopoverVisible] = useState(false);
 
@@ -34,7 +34,11 @@ export function DeleteButton({ taskId, onDeleteSuccess }: DeletePopoverProps) {
       onOpenChange={(e) => setPopoverVisible(e.open)}
     >
       <PopoverTrigger asChild>
-        <IconButton variant="ghost" onClick={handlePopoverVisible}>
+        <IconButton
+          variant="ghost"
+          aria-label="Deletar tarefa"
+          onClick={handlePopoverVisible}
+        >
           <FiTrash2 color="red" />
         </IconButton>
       </PopoverTrigger>
@@ -48,6 +52,7 @@ export function DeleteButton({ taskId, onDeleteSuccess }: DeletePopoverProps) {
               colorPalette="red"
               isLoading={isLoading}
               onClick={handleDelete}
+              aria-label="Confirmar deleção"
             >
               Confirmar
             </Button>
