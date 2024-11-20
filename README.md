@@ -16,13 +16,13 @@ Está é uma aplicação React para gerênciamento de tarefas. Ela utiliza Chakr
 
 3. Na página de configurações da aplicação:
 
-   - Em "Allowed Callback URLs", adicione `http://localhost:5173/`.
-   - Em "Allowed Logout URLs", adicione `http://localhost:5173/`.
-   - Em "Allowed Web Origins", adicione `http://localhost:5173/`.
+   - Em `Allowed Callback URLs`, adicione `http://localhost:5173/`.
+   - Em `Allowed Logout URLs`, adicione `http://localhost:5173/`.
+   - Em `Allowed Web Origins`, adicione `http://localhost:5173/`.
    - Se a aplicação rodar em uma porta diferente, substitua 5173 pela porta correta.
    - Salve as alterações.
 
-4. Anote o "Domain" e "Client ID" fornecidos na página de configurações.
+4. Anote o `Domain` e `Client ID` fornecidos na página de configurações.
 
 Para mais detalhes sobre a configuração do Auth0, consulte a [documentação oficial](https://auth0.com/docs/quickstart/spa/react).
 
