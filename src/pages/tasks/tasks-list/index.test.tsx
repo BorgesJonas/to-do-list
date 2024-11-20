@@ -198,19 +198,20 @@ describe("TasksList component", () => {
           return HttpResponse.json(updatedResponse);
         }
       }),
-      http.put(`${API_URL}/tasks`, async ({ request }) => {
-        const body = await request.json();
-        console.log("POST request body:", body);
+      http.put(`${API_URL}/tasks`, async () => {
         return HttpResponse.json(mockedTask);
       })
     );
 
     renderComponent();
+
     const taskTitle = await screen.findByText(mockedTask.title);
     expect(taskTitle).toBeVisible();
+
     const editButton = screen.getByRole("button", { name: /editar tarefa/i });
     await userEvent.click(editButton);
-    const drawerTitle = screen.getByRole("heading", { name: /nova tarefa/i });
+
+    const drawerTitle = screen.getByRole("heading", { name: /editar tarefa/i });
     expect(drawerTitle).toBeVisible();
 
     const titleInput = screen.getByRole("textbox", { name: /título/i });

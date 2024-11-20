@@ -16,7 +16,7 @@ export function useTableList<T, P extends object>(
   const handleGetData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-    console.log("HERE");
+
     try {
       const response = await service.get(url, {
         params: {

@@ -77,6 +77,7 @@ export function Details() {
                   <Tooltip content="Editar">
                     <IconButton
                       variant="ghost"
+                      aria-label="editar tarefa"
                       disabled={isActionsDisabled}
                       onClick={onEditTaskDrawerVisible}
                     >

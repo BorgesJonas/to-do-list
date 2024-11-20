@@ -129,4 +129,76 @@ describe("TaskDetails component", () => {
 
     expect(mockNavigate).toHaveBeenCalledWith("/tasks");
   });
+
+  it.only("Should edit task ", async () => {
+    server.use(
+      http.put(`${API_URL}/tasks/${taskId}`, async () => {
+        return HttpResponse.json(mockedTask);
+      }),
+      http.get(`${API_URL}/tasks/${taskId}`, () => {
+        return HttpResponse.json(mockedTask);
+      })
+    );
+
+    renderComponent();
+
+    expect(
+      await screen.findByRole("heading", { name: mockedTask.title })
+    ).toBeInTheDocument();
+
+    const editButton = screen.getByRole("button", { name: /editar tarefa/i });
+
+    await userEvent.click(editButton);
+
+    const drawerTitle = screen.getByRole("heading", { name: /editar tarefa/i });
+    expect(drawerTitle).toBeVisible();
+
+    const titleInput = screen.getByRole("textbox", { name: /título/i });
+    await userEvent.type(titleInput, mockedTask.title);
+
+    const dueDateInput = screen.getByLabelText(/data de vencimento/i);
+    await userEvent.type(dueDateInput, mockedTask.due_date);
+
+    const prioritySelect = screen.getByRole("combobox", {
+      name: /prioridade/i,
+    });
+
+    await userEvent.click(prioritySelect);
+
+    const lowPriorityOption = screen.getByRole("option", {
+      name: prioritiesLabels[mockedTask.priority],
+    });
+
+    expect(lowPriorityOption).toBeVisible();
+
+    await userEvent.click(lowPriorityOption);
+
+    const statusSelect = screen.getByRole("combobox", {
+      name: /status/i,
+    });
+
+    await userEvent.click(statusSelect);
+
+    const statusOption = screen.getByRole("option", {
+      name: statusLabels[mockedTask.status],
+    });
+
+    expect(statusOption).toBeVisible();
+
+    await userEvent.click(statusOption);
+
+    const descriptionInput = screen.getByRole("textbox", {
+      name: /descrição/i,
+    });
+
+    await userEvent.type(descriptionInput, mockedTask.description);
+
+    const saveButton = screen.getByRole("button", {
+      name: /confirmar edição/i,
+    });
+
+    await userEvent.click(saveButton);
+
+    expect(await screen.findByText(mockedTask.title)).toBeInTheDocument();
+  });
 });

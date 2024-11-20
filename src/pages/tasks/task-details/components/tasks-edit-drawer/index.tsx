@@ -81,7 +81,7 @@ export function TasksEditDrawer() {
           overflow="auto"
         >
           <DrawerHeader>
-            <DrawerTitle>Nova Tarefa</DrawerTitle>
+            <DrawerTitle>Editar Tarefa</DrawerTitle>
           </DrawerHeader>
           <DrawerBody>
             <TasksForm drawerRef={drawerRef} />
@@ -96,7 +96,11 @@ export function TasksEditDrawer() {
                 Cancelar
               </Button>
             </DrawerActionTrigger>
-            <Button type="submit" isLoading={isSubmitting}>
+            <Button
+              type="submit"
+              aria-label="Confirmar edição"
+              isLoading={isSubmitting}
+            >
               Editar
             </Button>
           </DrawerFooter>

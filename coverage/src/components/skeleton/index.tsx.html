@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">48.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>13/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">48.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>13/27</span>
             </div>
         
             
@@ -100,23 +100,25 @@
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -128,34 +130,32 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Skeleton as ChakraSkeleton, Circle, Stack } from "@chakra-ui/react";<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Skeleton as ChakraSkeleton, Circle, Stack } from "@chakra-ui/react";
 import * as React from "react";
 &nbsp;
 import { SkeletonCircleProps, SkeletonTextProps } from "./types";
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export const SkeletonCircle = React.forwardRef&lt;</span>
+export const SkeletonCircle = React.forwardRef&lt;
   HTMLDivElement,
   SkeletonCircleProps
-<span class="cstat-no" title="statement not covered" >&gt;(function SkeletonCircle(props, ref) {</span>
-<span class="cstat-no" title="statement not covered" >  const { size, ...rest } = props;</span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;Circle size={size} asChild ref={ref}&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;ChakraSkeleton {...rest} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/Circle&gt;</span>
+&gt;(function SkeletonCircle(props, ref) {
+  const { size, ...rest } = props;
+  return (
+    &lt;Circle size={size} asChild ref={ref}&gt;
+      &lt;ChakraSkeleton {...rest} /&gt;
+    &lt;/Circle&gt;
   );
-<span class="cstat-no" title="statement not covered" >});</span>
+});
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export const SkeletonText = React.forwardRef&lt;HTMLDivElement, SkeletonTextProps&gt;(</span>
-<span class="cstat-no" title="statement not covered" >  function SkeletonText(props, ref) {</span>
+export const SkeletonText = React.forwardRef&lt;HTMLDivElement, SkeletonTextProps&gt;(
+<span class="fstat-no" title="function not covered" >  function SkeletonText(props, ref) {</span>
 <span class="cstat-no" title="statement not covered" >    const { noOfLines = 3, gap, ...rest } = props;</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
 <span class="cstat-no" title="statement not covered" >      &lt;Stack gap={gap} width="full" ref={ref}&gt;</span>
@@ -171,9 +171,9 @@ import { SkeletonCircleProps, SkeletonTextProps } from "./types";
 <span class="cstat-no" title="statement not covered" >      &lt;/Stack&gt;</span>
     );
 <span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >);</span>
+);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export const Skeleton = ChakraSkeleton;</span>
+export const Skeleton = ChakraSkeleton;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -181,7 +181,7 @@ import { SkeletonCircleProps, SkeletonTextProps } from "./types";
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-20T14:35:19.419Z
+                at 2024-11-20T17:27:10.308Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

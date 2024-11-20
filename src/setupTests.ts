@@ -8,6 +8,10 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
+vi.mock("*.css", () => ({}));
+vi.mock("*.scss", () => ({}));
+vi.mock("*.less", () => ({}));
+
 class ResizeObserverMock {
   observe = vi.fn();
   unobserve = vi.fn();

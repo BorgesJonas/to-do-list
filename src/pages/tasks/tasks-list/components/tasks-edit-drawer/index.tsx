@@ -85,7 +85,7 @@ export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
           overflow="auto"
         >
           <DrawerHeader>
-            <DrawerTitle>Nova Tarefa</DrawerTitle>
+            <DrawerTitle>Editar Tarefa</DrawerTitle>
           </DrawerHeader>
           <DrawerBody>
             <TasksForm drawerRef={drawerRef} />
