@@ -1,4 +1,4 @@
-import { HStack, IconButton } from "@chakra-ui/react";
+import { HStack, IconButton, Text } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { AiOutlineLogout } from "react-icons/ai";
 
@@ -29,7 +29,7 @@ export function Actions() {
               <AiOutlineLogout />
             </IconButton>
           </Tooltip>
-          <p>{user?.email}</p>
+          <Text display={["none", "inherit"]}>{user?.email}</Text>
           <Avatar
             size="xs"
             name="Logo"

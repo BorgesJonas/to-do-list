@@ -10,7 +10,12 @@ export function Actions() {
     useTasksContext();
 
   return (
-    <Flex justifyContent="space-between" width="300px">
+    <Flex
+      justifyContent="space-between"
+      width="300px"
+      flexDirection={["column", "row"]}
+      gap={[4, 0]}
+    >
       <Button
         aria-label="Criar nova tarefa"
         onClick={onCreateTaskDrawerVisible}

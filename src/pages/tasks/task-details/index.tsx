@@ -12,6 +12,7 @@ export function TaskDetails() {
         alignItems="center"
         justifyContent="center"
         py={8}
+        px={4}
       >
         <Details />
         <TasksEditDrawer />

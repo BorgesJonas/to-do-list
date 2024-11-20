@@ -17,7 +17,7 @@ export function TasksList() {
         overflow="auto"
         alignItems="center"
         justifyContent="center"
-        py={8}
+        p={8}
       >
         <VStack gap={8}>
           <Header />

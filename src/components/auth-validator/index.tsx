@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Text } from "@chakra-ui/react";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
@@ -23,6 +23,19 @@ export function AuthValidator() {
   }, [isLoading, isAuthenticated]);
 
   return (
-    <>{isLoading ? <Text fontSize="xl">Carregando...</Text> : <Outlet />} </>
+    <>
+      {isLoading ? (
+        <Flex
+          width="100%"
+          height="100vh"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Spinner />
+        </Flex>
+      ) : (
+        <Outlet />
+      )}{" "}
+    </>
   );
 }

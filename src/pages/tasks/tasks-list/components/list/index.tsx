@@ -15,7 +15,7 @@ export function List() {
   const { isLoading, tasks, pagination, setCurrentPage } = useTasksContext();
 
   return (
-    <Card.Root width="600px">
+    <Card.Root width={["auto", "600px"]}>
       <Card.Body gap={2} transition="width 200ms ease, min-width 200ms ease">
         {isLoading && <TasksLoader />}
         {!isLoading && !tasks.length && <EmptyTasks />}

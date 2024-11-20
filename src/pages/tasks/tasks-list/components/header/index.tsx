@@ -4,7 +4,7 @@ import { LiaClipboardListSolid } from "react-icons/lia";
 export function Header() {
   return (
     <Flex as="header" gap={4} alignItems="center">
-      <Heading>TODO LIST</Heading>
+      <Heading>TO DO LIST</Heading>
       <LiaClipboardListSolid size={22} />
     </Flex>
   );
