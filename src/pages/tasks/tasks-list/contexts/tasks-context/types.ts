@@ -1,4 +1,4 @@
-import { Tasks } from "@/types/tasks";
+import { Task } from "@/types/tasks";
 import { Pagination } from "@/hooks/use-table-list/types";
 import { Task } from "@/types/task";
 

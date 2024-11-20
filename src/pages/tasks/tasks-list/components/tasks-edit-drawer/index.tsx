@@ -100,7 +100,11 @@ export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
                 Cancelar
               </Button>
             </DrawerActionTrigger>
-            <Button type="submit" isLoading={isSubmitting}>
+            <Button
+              type="submit"
+              aria-label="Confirmar edição"
+              isLoading={isSubmitting}
+            >
               Editar
             </Button>
           </DrawerFooter>

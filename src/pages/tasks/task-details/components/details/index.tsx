@@ -1,4 +1,3 @@
-import { prioritiesLabels, statusLabels } from "@/common/consts";
 import { formatDate } from "@/common/formatters";
 import { Tooltip } from "@/components/tooltip";
 import { Card, Flex, Grid, GridItem, IconButton, Text } from "@chakra-ui/react";
@@ -7,6 +6,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { DeleteButton } from "./components/delete-button";
 import { useTaskContext } from "@/pages/tasks/task-details/contexts/task-context";
+import { prioritiesLabels } from "@/pages/tasks/common/consts";
 
 export function Details() {
   const navigate = useNavigate();

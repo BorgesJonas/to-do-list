@@ -2,14 +2,15 @@ import { Flex, Text, Box, IconButton } from "@chakra-ui/react";
 import { FiEdit, FiEye } from "react-icons/fi";
 
 import { Tag } from "@/components/tag";
-import { TaskDetailsProps } from "./types";
+
 import { Tooltip } from "@/components/tooltip";
-import { prioritiesLabels, statusLabels } from "@/common/consts";
 import { formatDate } from "@/common/formatters";
 import { prioritiesTagsSchema, statusTagsSchema } from "./consts";
 import { DeleteButton } from "./delete-button";
 import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context";
 import { useNavigate } from "react-router-dom";
+import { statusLabels, prioritiesLabels } from "@/pages/tasks/common/consts";
+import { TaskDetailsProps } from "./types";
 
 export function TaskDetails({ task }: TaskDetailsProps) {
   const navigate = useNavigate();
@@ -53,8 +54,13 @@ export function TaskDetails({ task }: TaskDetailsProps) {
             <FiEye color="tea" />
           </IconButton>
         </Tooltip>
+
         <Tooltip content="Editar">
-          <IconButton variant="solid" onClick={handleEditTask}>
+          <IconButton
+            variant="solid"
+            aria-label="Editar task"
+            onClick={handleEditTask}
+          >
             <FiEdit color="green" />
           </IconButton>
         </Tooltip>

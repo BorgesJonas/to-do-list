@@ -1,14 +1,9 @@
-import { act, renderHook, waitFor } from "@testing-library/react";
-import { describe, it, expect, beforeAll, afterAll, afterEach } from "vitest";
-import { setupServer } from "msw/node";
+import { describe, it, expect } from "vitest";
 import { http, HttpResponse } from "msw";
+import { act, renderHook, waitFor } from "@testing-library/react";
+import { server } from "@/setupTests";
+
 import { useGet } from ".";
-
-const server = setupServer();
-
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
 
 describe("useGet hook", () => {
   it("Should fetch data successfully", async () => {

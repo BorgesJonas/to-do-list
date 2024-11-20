@@ -1,6 +1,4 @@
-import { Tasks } from "@/types/tasks";
-
-import { Task } from "@/types/task";
+import { Task } from "@/types/tasks";
 
 export type TaskEditParams = Task;
 
@@ -9,7 +7,7 @@ export interface TaskProviderState {
 }
 
 export interface TaskProviderValues extends TaskProviderState {
-  task: Tasks;
+  task: Task;
   isLoading: boolean;
   onDeleteTask: (id: string) => void;
   onEditTask: (taskFormValues: TaskEditParams) => void;

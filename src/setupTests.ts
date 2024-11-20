@@ -1,5 +1,18 @@
 import "@testing-library/jest-dom";
+import { setupServer } from "msw/node";
 import { vi } from "vitest";
+
+export const server = setupServer();
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+class ResizeObserverMock {
+  observe = vi.fn();
+  unobserve = vi.fn();
+  disconnect = vi.fn();
+}
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
@@ -14,3 +27,10 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: vi.fn(),
   })),
 });
+
+Object.defineProperty(window.Element.prototype, "scrollTo", {
+  writable: true,
+  value: vi.fn(),
+});
+
+window.ResizeObserver = ResizeObserverMock;
