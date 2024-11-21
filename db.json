@@ -1,12 +1,3 @@
 {
-  "tasks": [
-    {
-      "title": "Nova Tarefa teste",
-      "due_date": "2026-10-10",
-      "status": "todo",
-      "priority": "highest",
-      "description": "asasasas",
-      "id": "8108"
-    }
-  ]
+  "tasks": []
 }
