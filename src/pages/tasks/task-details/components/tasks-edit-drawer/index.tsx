@@ -44,16 +44,24 @@ export function TasksEditDrawer() {
   }
 
   async function onSubmit(data: FormValues) {
-    await onEditTask({
-      id: task.id,
-      title: data.title,
-      due_date: data.dueDate,
-      status: data.status[0] as TasksStatus,
-      priority: data.priority[0] as TasksPriorities,
-      description: data.description,
-    });
+    try {
+      await onEditTask({
+        id: task.id,
+        title: data.title,
+        due_date: data.dueDate,
+        status: data.status[0] as TasksStatus,
+        priority: data.priority[0] as TasksPriorities,
+        description: data.description,
+      });
 
-    handleClose();
+      handleClose();
+    } catch {
+      toaster.create({
+        title: "Erro",
+        description: "Erro ao editar tarefa",
+        type: "error",
+      });
+    }
   }
 
   useEffect(() => {

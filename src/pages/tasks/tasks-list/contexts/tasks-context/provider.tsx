@@ -1,16 +1,15 @@
-import { useTableList } from "@/hooks/use-table-list";
 import { PropsWithChildren } from "react";
-import { TasksContext } from "./context";
+import { useTableList } from "@/hooks/use-table-list";
 import { Task } from "@/types/task";
 import { useState } from "@/hooks/use-state";
+import { service } from "@/service";
+import { TasksContext } from "./context";
 import {
   TasksProviderState,
   TaskEditParams,
   TaskCreateParams,
   FilterParams,
 } from "./types";
-import { toaster } from "@/components/toaster/consts";
-import { service } from "@/service";
 
 export function TasksProvider({ children }: PropsWithChildren) {
   const [state, setState] = useState<TasksProviderState>({
@@ -35,61 +34,18 @@ export function TasksProvider({ children }: PropsWithChildren) {
 
   async function handleEditTask(task: TaskEditParams) {
     const { id, ...otherProps } = task;
-
-    try {
-      await service.put(`tasks/${id}`, { ...otherProps });
-
-      toaster.create({
-        title: "Criada",
-        description: "Sua tarefa foi editada com sucesso!",
-        type: "success",
-      });
-      refetch();
-    } catch {
-      toaster.create({
-        title: "Erro",
-        description: "Erro ao editar tarefa",
-        type: "error",
-      });
-    }
+    await service.put(`tasks/${id}`, { ...otherProps });
+    refetch();
   }
 
   async function handleCreateTask(task: TaskCreateParams) {
-    try {
-      await service.post("tasks", task);
-
-      toaster.create({
-        title: "Criada",
-        description: "Sua tarefa foi criada com sucesso!",
-        type: "success",
-      });
-
-      refetch();
-    } catch {
-      toaster.create({
-        title: "Erro",
-        description: "Erro ao criar tarefa",
-        type: "error",
-      });
-    }
+    await service.post("tasks", task);
+    refetch();
   }
 
   async function handleDeleteTask(id: string) {
-    try {
-      await service.delete(`tasks/${id}`);
-      toaster.create({
-        title: "Criada",
-        description: "Sua tarefa foi deletada com sucesso!",
-        type: "success",
-      });
-      refetch();
-    } catch {
-      toaster.create({
-        title: "Erro",
-        description: "Houve um erro ao tentar deletar a task",
-        type: "error",
-      });
-    }
+    await service.delete(`tasks/${id}`);
+    refetch();
   }
 
   function handleFilterDrawerVisible() {

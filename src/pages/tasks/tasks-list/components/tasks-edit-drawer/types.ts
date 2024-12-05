@@ -1,7 +1,3 @@
-export interface TasksEditDrawerProps {
-  onEditSuccess?: () => void;
-}
-
 export interface FormValues {
   title: string;
   dueDate: string;
