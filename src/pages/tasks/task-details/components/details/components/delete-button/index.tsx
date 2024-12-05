@@ -1,5 +1,9 @@
 import { FiTrash2 } from "react-icons/fi";
-import { useState } from "react";
+import { Flex, IconButton, Text } from "@chakra-ui/react";
+import { useTaskContext } from "@/pages/tasks/task-details/contexts/task-context";
+import { toaster } from "@/components/toaster/consts";
+import { useState } from "@/hooks/use-state";
+import { Button } from "@/components/button";
 import {
   PopoverArrow,
   PopoverBody,
@@ -7,31 +11,43 @@ import {
   PopoverRoot,
   PopoverTrigger,
 } from "@/components/popover";
-import { Flex, IconButton, Text } from "@chakra-ui/react";
-import { Button } from "@/components/button";
+
 import { DeletePopoverProps } from "./types";
-import { useTaskContext } from "@/pages/tasks/task-details/contexts/task-context";
 
 export function DeleteButton({ taskId, onDeleteSuccess }: DeletePopoverProps) {
   const { onDeleteTask } = useTaskContext();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isPopoverVisible, setPopoverVisible] = useState(false);
+  const [state, setState] = useState({
+    isLoading: false,
+    isPopoverVisible: false,
+  });
+
+  const { isLoading, isPopoverVisible } = state;
 
   function handlePopoverVisible() {
-    setPopoverVisible(!isPopoverVisible);
+    setState({ isPopoverVisible: !isPopoverVisible });
   }
 
   async function handleDelete() {
-    setIsLoading(true);
-    await onDeleteTask(taskId);
-    setIsLoading(false);
-    onDeleteSuccess();
+    setState({ isLoading: true });
+
+    try {
+      await onDeleteTask(taskId);
+      onDeleteSuccess();
+    } catch {
+      toaster.create({
+        title: "Erro",
+        description: "Houve um erro ao tentar deletar a task",
+        type: "error",
+      });
+    } finally {
+      setState({ isLoading: false });
+    }
   }
 
   return (
     <PopoverRoot
       open={isPopoverVisible}
-      onOpenChange={(e) => setPopoverVisible(e.open)}
+      onOpenChange={(e) => setState({ isPopoverVisible: e.open })}
     >
       <PopoverTrigger asChild>
         <IconButton
