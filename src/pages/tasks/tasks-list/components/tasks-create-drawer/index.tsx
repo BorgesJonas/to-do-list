@@ -20,6 +20,7 @@ import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context
 import { TasksForm } from "@/pages/tasks/components/tasks-form";
 import { TasksPriorities } from "@/enums/tasks-priorities";
 import { TasksStatus } from "@/enums/tasks-status";
+import { toaster } from "@/components/toaster/consts";
 
 export function TasksCreateDrawer() {
   const { onCreateTask } = useTasksContext();
@@ -41,15 +42,30 @@ export function TasksCreateDrawer() {
     reset();
   }
 
-  function onSubmit(data: FormValues) {
-    onCreateTask({
-      title: data.title,
-      due_date: data.dueDate,
-      priority: data.priority[0] as TasksPriorities,
-      status: data.status[0] as TasksStatus,
-      description: data.description,
-    });
-    handleClose();
+  async function onSubmit(data: FormValues) {
+    try {
+      await onCreateTask({
+        title: data.title,
+        due_date: data.dueDate,
+        priority: data.priority[0] as TasksPriorities,
+        status: data.status[0] as TasksStatus,
+        description: data.description,
+      });
+
+      toaster.create({
+        title: "Criada",
+        description: "Sua tarefa foi criada com sucesso!",
+        type: "success",
+      });
+
+      handleClose();
+    } catch {
+      toaster.create({
+        title: "Erro",
+        description: "Erro ao criar tarefa",
+        type: "error",
+      });
+    }
   }
 
   return (

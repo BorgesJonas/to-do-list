@@ -21,9 +21,10 @@ import { Task } from "@/types/task";
 import { TasksStatus } from "@/enums/tasks-status";
 import { TasksPriorities } from "@/enums/tasks-priorities";
 
-import { FormValues, TasksEditDrawerProps } from "./types";
+import { FormValues } from "./types";
+import { toaster } from "@/components/toaster/consts";
 
-export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
+export function TasksEditDrawer() {
   const { onEditTask } = useTasksContext();
   const drawerRef = useRef<HTMLDivElement>(null);
   const { selectedTask, onEditTaskDrawerVisible, isEditDrawerOpen } =
@@ -46,18 +47,30 @@ export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
   }
 
   async function onSubmit(data: FormValues) {
-    await onEditTask({
-      id: selectedTask.id,
-      title: data.title,
-      due_date: data.dueDate,
-      status: data.status[0] as TasksStatus,
-      priority: data.priority[0] as TasksPriorities,
-      description: data.description,
-    });
+    try {
+      await onEditTask({
+        id: selectedTask.id,
+        title: data.title,
+        due_date: data.dueDate,
+        status: data.status[0] as TasksStatus,
+        priority: data.priority[0] as TasksPriorities,
+        description: data.description,
+      });
 
-    if (onEditSuccess) onEditSuccess();
+      toaster.create({
+        title: "Criada",
+        description: "Sua tarefa foi editada com sucesso!",
+        type: "success",
+      });
 
-    handleClose();
+      handleClose();
+    } catch {
+      toaster.create({
+        title: "Erro",
+        description: "Erro ao editar tarefa",
+        type: "error",
+      });
+    }
   }
 
   useEffect(() => {
@@ -68,7 +81,7 @@ export function TasksEditDrawer({ onEditSuccess }: TasksEditDrawerProps) {
       setValue("status", [selectedTask.status]);
       setValue("description", selectedTask.description);
     }
-  }, [setValue, selectedTask]);
+  }, [selectedTask]);
 
   return (
     <DrawerRoot

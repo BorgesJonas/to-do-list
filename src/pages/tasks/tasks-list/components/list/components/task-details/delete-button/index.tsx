@@ -11,6 +11,7 @@ import { Button } from "@/components/button";
 import { DeletePopoverProps } from "./types";
 import { useTasksContext } from "@/pages/tasks/tasks-list/contexts/tasks-context";
 import { useState } from "@/hooks/use-state";
+import { toaster } from "@/components/toaster/consts";
 
 export function DeleteButton({ taskId }: DeletePopoverProps) {
   const { onDeleteTask } = useTasksContext();
@@ -27,8 +28,23 @@ export function DeleteButton({ taskId }: DeletePopoverProps) {
 
   async function handleDelete() {
     setState({ isLoading: true });
-    await onDeleteTask(taskId);
-    setState({ isLoading: false });
+
+    try {
+      await onDeleteTask(taskId);
+      toaster.create({
+        title: "Deletada",
+        description: "Sua tarefa foi deletada com sucesso!",
+        type: "success",
+      });
+    } catch {
+      toaster.create({
+        title: "Erro",
+        description: "Houve um erro ao tentar deletar a task",
+        type: "error",
+      });
+    } finally {
+      setState({ isLoading: false });
+    }
   }
 
   return (
